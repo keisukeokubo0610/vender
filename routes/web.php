@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 
 
-// kokooko
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +29,13 @@ use App\Http\Controllers\Auth\AuthController;
 /* 
     getのあと、’指定したいurl’,’どのコントローラー使うのか’
 */
+// ログインフォーム
 Route::get('/', [AuthController::class, 'showLogin']) ->name('showLogin');
 
-// Route::get('login', [AuthController::class,'login'])->name('login');
+// ログイン処理
 Route::post('login', [AuthController::class, 'login'])->name('login');
+
+//ログイン後のホーム画面へ
+Route::get('home', function() {
+    return view('home');
+})->name('home');

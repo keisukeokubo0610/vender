@@ -23,30 +23,37 @@
         <div class="logo text-center">login</div>
         <!-- Main Form -->
         <div class="login-form-1">
+
             <form method="post" id="login-form" class="text-left" action="{{ route('login') }}">
                 @csrf
                 <div class="login-form-main-message"></div>
                 <div class="main-login-form">
 
                     @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                @if(session('login_error'))
+                <div class="alert alert-danger">
+                    {{ session('login_error') }}
+                </div>
                 @endif
 
                     <div class="login-group">
                         <div class="form-group">
-                            <label for="email" class="sr-only">e-mail</label>
+                            <label for="email" class="sr-only">email</label>
                             <input type="text" class="form-control" id="email" name="email"
                                 placeholder="email">
                         </div>
                         <div class="form-group">
-                            <label for="lg_password" class="sr-only">Password</label>
-                            <input type="password" class="form-control" id="lg_password" name="password"
+                            <label for="password" class="sr-only">password</label>
+                            <input type="password" class="form-control" id="password" name="password"
                                 placeholder="password">
                         </div>
                         {{-- <div class="form-group login-group-checkbox">
@@ -56,7 +63,7 @@
                     </div>
                     <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
                 </div>
-                <div class="etc-login-form ">
+                <div class="etc-login-form">
                     {{-- <p>forgot your password? <a href="#">click here</a></p> --}}
                     <p class="text-center btn-dark">新規登録はこちら→<a href="#">新規登録</a></p>
                 </div>
