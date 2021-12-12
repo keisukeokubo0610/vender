@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 class AuthController extends Controller
-{   
+{
     //@return View
     public function showLogin()
     {
@@ -22,20 +22,24 @@ class AuthController extends Controller
     */
     public function login(LoginFormRequest $request)
     {
-        $credentials = $request->only(['email', 'password']);
-        
+
+        $credentials = $request->only('email', 'password');
+
 
         //成功した場合
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
             //homeルータにリダイレクトする
-            return redirect('home')->with('login_success','ログインに成功しました！');
+            return redirect('/home')->with('login_success', 'ログインに成功しました！');
         }
-        
+
         //失敗した場合
         //もとの画面に戻る
         return back()->withErrors([
             'login_error' => 'メールアドレスかパスワードが間違っています。',
         ]);
+
+        // dd($request->all());
     }
 }

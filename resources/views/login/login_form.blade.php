@@ -18,14 +18,49 @@
 
 <body>
 
+
+
+
+    <?php
+
+    $dsn = 'mysql:dbname=laravelDB;host=localhost';
+    $user = 'root';
+    $password = 'root';
+    
+    try{
+        $dbh = new PDO($dsn, $user, $password);
+    
+        print('<br>');
+    
+        if ($dbh == null){
+            print('接続に失敗しました。<br>');
+        }else{
+            print('接続に成功しました。<br>');
+        }
+    }catch (PDOException $e){
+        print('Error:'.$e->getMessage());
+        die();
+    }
+    
+    $dbh = null;
+    
+    ?>
+    
+
+
+
+
+
+
+
     <!-- LOGIN FORM -->
     <div class="text-cente" style="padding:50px 0">
         <div class="logo text-center">login</div>
         <!-- Main Form -->
         <div class="login-form-1">
-
+            
             <form method="post" id="login-form" class="text-left" action="{{ route('login') }}">
-                @csrf
+                
                 <div class="login-form-main-message"></div>
                 <div class="main-login-form">
 
@@ -67,6 +102,7 @@
                     {{-- <p>forgot your password? <a href="#">click here</a></p> --}}
                     <p class="text-center btn-dark">新規登録はこちら→<a href="#">新規登録</a></p>
                 </div>
+                @csrf
             </form>
         </div>
         <!-- end:Main Form -->
