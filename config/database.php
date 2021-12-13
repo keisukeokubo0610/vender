@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Str;
 
-
-
 return [
 
     /*
@@ -47,13 +45,13 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DATABASE_URL','forge'),
-            'host' => env('localhost','127.0.0.1'),
-            'port' => env('3306'),
-            'database' => env('DB_VENDING'),
-            'username' => env('root','root'),
-            'password' => env('','root'),
-            'unix_socket' => env('','/Applications/MAMP/tmp/mysql/mysql.sock'),
+            'url' => env('DATABASE_URL'),
+            'host' => env('localhost', '127.0.0.1'),
+            'port' => env('', '3306'),
+            'database' => env('mysql','laravelDB'),
+            'username' => env('root','vender'),
+            'password' => env('root','password'),
+            'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',

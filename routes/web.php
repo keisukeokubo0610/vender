@@ -16,26 +16,36 @@ use App\Http\Controllers\Auth\AuthController;
 |
 */
 
-// Route::get('/vender/login', function () {
-//     $venders = \App\Models\Vender::all();
-//     return view('/', ['venders' => $venders]);
-// });
-// Route::get('/vender/login', 'AuthController@showLogin');
-
-// Route::get('/vender/login','App\Http\Controllers\VenderController@loginForm');
-
-// Route::post('/success','App\Http\Controllers\VenderController@loginForm')->name('success');
-
 /* 
     getのあと、’指定したいurl’,’どのコントローラー使うのか’
 */
-// ログインフォーム
-Route::get('/', [AuthController::class, 'showLogin']) ->name('showLogin');
+//ログイン前の処理
+Route::group(['middleware'=> ['guest']],function() {
+    // ログインフォーム
+    Route::get('/', [AuthController::class, 'showLogin']) ->name('showLogin');
 
-// ログイン処理
-Route::post('login', [AuthController::class, 'login'])->name('login');
+    // ログイン処理
+    Route::post('login', [AuthController::class, 'login'])->name('login');
 
-//ログイン後のホーム画面へ
-Route::get('home', function() {
-    return view('home');
-})->name('home');
+});
+
+
+//ログイン後の処理
+Route::group(['middleware'=> ['auth']],function() {
+    
+    //ログイン後のホーム画面へ
+    Route::get('home', function() {
+        return view('home');
+    })->name('home');
+
+    //ログアウト
+    Route::post('logout',
+    [AuthController::class, 'logout'])->name('logout');
+        
+
+});
+
+
+
+//ユーザー新規登録
+Route::get('register', [AuthController::class, 'register']) ->name('register');

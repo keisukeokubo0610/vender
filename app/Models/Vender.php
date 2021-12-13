@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vender extends Model
 {
-    // use HasFactory;
+    use HasFactory;
     protected $fillable = [
         'email',
         'password'

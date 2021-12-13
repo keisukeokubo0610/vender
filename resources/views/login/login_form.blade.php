@@ -1,57 +1,10 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('template')
 
-<head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+@section('title','ログイン画面')
+@section('description','ユーザーログインのページ')
+@include('head')
 
-    <!-- All the files that are required -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>VenderLoginページ</title>
-</head>
-
-<body>
-
-
-
-
-    <?php
-
-    $dsn = 'mysql:dbname=laravelDB;host=localhost';
-    $user = 'root';
-    $password = 'root';
-    
-    try{
-        $dbh = new PDO($dsn, $user, $password);
-    
-        print('<br>');
-    
-        if ($dbh == null){
-            print('接続に失敗しました。<br>');
-        }else{
-            print('接続に成功しました。<br>');
-        }
-    }catch (PDOException $e){
-        print('Error:'.$e->getMessage());
-        die();
-    }
-    
-    $dbh = null;
-    
-    ?>
-    
-
-
-
-
-
-
+@section('content')
 
     <!-- LOGIN FORM -->
     <div class="text-cente" style="padding:50px 0">
@@ -60,7 +13,7 @@
         <div class="login-form-1">
             
             <form method="post" id="login-form" class="text-left" action="{{ route('login') }}">
-                
+                @csrf
                 <div class="login-form-main-message"></div>
                 <div class="main-login-form">
 
@@ -74,11 +27,21 @@
                         </div>
                     @endif
 
-                @if(session('login_error'))
+                {{-- @if(session('login_error'))
                 <div class="alert alert-danger">
                     {{ session('login_error') }}
                 </div>
                 @endif
+                @if(session('logout'))
+                <div class="alert alert-danger">
+                    {{ session('logout') }}
+                </div>
+                @endif --}}
+                {{-- 警告文 --}}
+                <x-alert type="danger" :session="session('danger')" />
+
+
+
 
                     <div class="login-group">
                         <div class="form-group">
@@ -100,16 +63,12 @@
                 </div>
                 <div class="etc-login-form">
                     {{-- <p>forgot your password? <a href="#">click here</a></p> --}}
-                    <p class="text-center btn-dark">新規登録はこちら→<a href="#">新規登録</a></p>
+                    <p class="text-center btn-dark mt-2">新規登録はこちら→<a href="{{ route('register') }}">新規登録</a></p>
                 </div>
-                @csrf
+             
             </form>
         </div>
         <!-- end:Main Form -->
     </div>
 
-
-
-</body>
-
-</html>
+@endsection
