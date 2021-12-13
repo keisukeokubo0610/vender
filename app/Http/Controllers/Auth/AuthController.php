@@ -43,9 +43,19 @@ class AuthController extends Controller
         // dd($request->all());
     }
 
-    public function register() {
+    //ユーザー新規登録画面に行く
+    public function showRegister() {
         return view('register');
     }
+
+
+    //ユーザー登録
+    // public function register(Request $request)
+    // {
+    //     \Session::flash('err_msg','ブログが登録されました。');
+    //     return redirect(route('login.login_form'));
+    // }
+
 
     /**
      * ユーザーをアプリケーションからログアウトさせる
@@ -65,6 +75,11 @@ class AuthController extends Controller
         ('danger','ログアウトしました！');
     }
 
+    // 戻るボタン
+    public function backBtn()
+    {
+        return back();
+    }
 
 
 }

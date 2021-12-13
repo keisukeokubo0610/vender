@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\SearchController;
 
 
 
@@ -27,6 +28,7 @@ Route::group(['middleware'=> ['guest']],function() {
     // ログイン処理
     Route::post('login', [AuthController::class, 'login'])->name('login');
 
+    
 });
 
 
@@ -34,9 +36,17 @@ Route::group(['middleware'=> ['guest']],function() {
 Route::group(['middleware'=> ['auth']],function() {
     
     //ログイン後のホーム画面へ
-    Route::get('home', function() {
-        return view('home');
-    })->name('home');
+    // Route::get('home', function() {
+    //     return view('home');
+    // })->name('home');
+
+
+    Route::get('home',[SearchController::class, 'searchProductlist'])->name('searchProductlist');
+
+
+
+
+
 
     //ログアウト
     Route::post('logout',
@@ -48,4 +58,5 @@ Route::group(['middleware'=> ['auth']],function() {
 
 
 //ユーザー新規登録
-Route::get('register', [AuthController::class, 'register']) ->name('register');
+Route::get('register', [AuthController::class, 'showRegister']) ->name('showRegister');
+

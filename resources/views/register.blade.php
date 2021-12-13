@@ -11,10 +11,12 @@
 	<div class="logo">新規登録</div>
 	<!-- Main Form -->
 	<div class="login-form-1">
-		<form id="register-form" class="text-left">
+		<form action="#" method="POST" id="register-form" class="text-left">
+			@csrf
 			<div class="login-form-main-message"></div>
 			<div class="main-login-form">
 				<div class="login-group">
+					
 					{{-- 名前 --}}
 					<div class="form-group">
 						<label for="name" class="sr-only">name</label>
@@ -42,7 +44,7 @@
 				<button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
 			</div>
 			<div class="etc-login-form">
-				<p>already have an account? <a href="{{ route('showLogin') }}">login here</a></p>
+				<p>すでに登録済みの方はこちら <a href="{{ route('showLogin') }}">login here</a></p>
 			</div>
 		</form>
 	</div>

@@ -63,7 +63,7 @@
                 </div>
                 <div class="etc-login-form">
                     {{-- <p>forgot your password? <a href="#">click here</a></p> --}}
-                    <p class="text-center btn-dark mt-2">新規登録はこちら→<a href="{{ route('register') }}">新規登録</a></p>
+                    <p class="text-center btn-dark mt-2">新規登録はこちら→<a href="{{ route('showRegister') }}">新規登録</a></p>
                 </div>
              
             </form>
