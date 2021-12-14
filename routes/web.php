@@ -56,7 +56,9 @@ Route::group(['middleware'=> ['auth']],function() {
 
 
 
-//ユーザー新規登録
+//ユーザー新規登録画面表示
 Route::get('register', [AuthController::class, 'showRegister']) ->name('showRegister');
 
 
+//ユーザー登録
+Route::post('register/create',[AuthController::class, 'userCreate'])->name('userCreate'); 

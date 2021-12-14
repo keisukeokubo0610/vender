@@ -1,8 +1,8 @@
 @extends('template')
 
-@section('title','ログイン画面')
-@section('description','ユーザーログインのページ')
-@include('head')
+@section('title', 'ログイン画面')
+@section('description', 'ユーザーログインのページ')
+    @include('head')
 
 @section('content')
 
@@ -11,7 +11,7 @@
         <div class="logo text-center">login</div>
         <!-- Main Form -->
         <div class="login-form-1">
-            
+
             <form method="post" id="login-form" class="text-left" action="{{ route('login') }}">
                 @csrf
                 <div class="login-form-main-message"></div>
@@ -27,18 +27,25 @@
                         </div>
                     @endif
 
-                {{-- @if(session('login_error'))
+
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    {{-- @if (session('login_error'))
                 <div class="alert alert-danger">
                     {{ session('login_error') }}
                 </div>
                 @endif
-                @if(session('logout'))
+                @if (session('logout'))
                 <div class="alert alert-danger">
                     {{ session('logout') }}
                 </div>
                 @endif --}}
-                {{-- 警告文 --}}
-                <x-alert type="danger" :session="session('danger')" />
+                    {{-- 警告文 --}}
+                    <x-alert type="danger" :session="session('danger')" />
 
 
 
@@ -46,8 +53,7 @@
                     <div class="login-group">
                         <div class="form-group">
                             <label for="email" class="sr-only">email</label>
-                            <input type="text" class="form-control" id="email" name="email"
-                                placeholder="email">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="email">
                         </div>
                         <div class="form-group">
                             <label for="password" class="sr-only">password</label>
@@ -65,7 +71,7 @@
                     {{-- <p>forgot your password? <a href="#">click here</a></p> --}}
                     <p class="text-center btn-dark mt-2">新規登録はこちら→<a href="{{ route('showRegister') }}">新規登録</a></p>
                 </div>
-             
+
             </form>
         </div>
         <!-- end:Main Form -->

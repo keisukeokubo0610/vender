@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginFormRequest;
+use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Create;
+use Illuminate\Support\Facades\DB;
 
 
 class AuthController extends Controller
@@ -44,23 +47,42 @@ class AuthController extends Controller
     }
 
     //ユーザー新規登録画面に行く
-    public function showRegister() {
+    public function showRegister()
+    {
         return view('register');
     }
 
 
-    //ユーザー登録
-    // public function register(Request $request)
-    // {
-    //     \Session::flash('err_msg','ブログが登録されました。');
-    //     return redirect(route('login.login_form'));
-    // }
+    // ユーザー登録
+    public function userCreate(RegisterUserRequest $request)
+    {
+
+
+        //ユーザーのデータ受け取る
+        $inputs = $request->all();
+
+        DB::beginTransaction();
+
+        try {
+            //ユーザー登録
+            Create::create($inputs);
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollback();
+            abort(500);
+        }
+
+
+
+        session()->flash('success', 'ユーザー登録が完了しました。');
+        return redirect(route('showLogin'));
+    }
 
 
     /**
      * ユーザーをアプリケーションからログアウトさせる
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
@@ -71,10 +93,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/')->with
-        ('danger','ログアウトしました！');
+        return redirect('/')->with('danger', 'ログアウトしました！');
     }
-
-  
-
 }
