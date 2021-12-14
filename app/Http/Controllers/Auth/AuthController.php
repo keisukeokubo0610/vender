@@ -75,11 +75,6 @@ class AuthController extends Controller
         ('danger','ログアウトしました！');
     }
 
-    // 戻るボタン
-    public function backBtn()
-    {
-        return back();
-    }
-
+  
 
 }

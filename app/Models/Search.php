@@ -18,6 +18,7 @@ class Search extends Model
         // 在庫数
         // メーカー名
         'id',
+        'img_path',
         'product_name',
         'price',
         'stock',
@@ -25,3 +26,4 @@ class Search extends Model
 
         ];
 }
+

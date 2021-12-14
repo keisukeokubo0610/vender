@@ -35,17 +35,16 @@ Route::group(['middleware'=> ['guest']],function() {
 //ログイン後の処理
 Route::group(['middleware'=> ['auth']],function() {
     
-    //ログイン後のホーム画面へ
     // Route::get('home', function() {
     //     return view('home');
     // })->name('home');
-
-
+        
+        
+    //ログイン後のホーム画面(商品一覧)へ
     Route::get('home',[SearchController::class, 'searchProductlist'])->name('searchProductlist');
 
-
-
-
+    //商品詳細ページ
+    Route::get('/product/{id}',[SearchController::class, 'showDetail'])->name('showDetail');
 
 
     //ログアウト
@@ -59,4 +58,5 @@ Route::group(['middleware'=> ['auth']],function() {
 
 //ユーザー新規登録
 Route::get('register', [AuthController::class, 'showRegister']) ->name('showRegister');
+
 

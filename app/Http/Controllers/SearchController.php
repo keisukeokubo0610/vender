@@ -4,19 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Search;
+use Config\Session;
 
-
-//商品一覧をする
 class SearchController extends Controller
 {
+
+    /* 商品詳細画面を表示
+        @return view
+    */
+    //商品一覧をする
     public function searchProductlist()
     {
         // $products = Search::all();
+        // SELECT * FROM companies INNER JOIN products ON companies.id = products.company_id;
 
-        //    SELECT * FROM companies INNER JOIN products ON companies.id = products.company_id;
-
-        $results = Search::select([
+        $products = Search::select([
             'product.id',
+            'product.img_path',
             'product.product_name',
             'product.price',
             'product.stock',
@@ -29,6 +33,26 @@ class SearchController extends Controller
             ->get();
 
 
-        return view('/home', ['results'=>$results]);
+        return view('/home', ['products' => $products]);
+    }
+
+
+    /* 商品詳細画面を表示
+        @param int $id
+        @return view
+    */
+    public function showDetail($id)
+    {
+        $product = Search::find($id);
+
+
+        if (is_null($product)) {
+
+            return redirect(route('searchProductlist'))->with('err_msg', 'データがありません');
+
+        }
+
+        return view('searchDetail', ['product' => $product]);
+
     }
 }

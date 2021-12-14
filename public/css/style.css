@@ -343,3 +343,12 @@ label:hover:before {
     color: #aaaaaa;
     font-weight: bold;
 }
+
+img {
+    max-width: 60px;
+    /* height:  */
+}
+
+th {
+    vertical-align: middle!important;
+}
