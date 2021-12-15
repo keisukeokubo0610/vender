@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ProductController;
 
 
 
@@ -61,4 +62,15 @@ Route::get('register', [AuthController::class, 'showRegister']) ->name('showRegi
 
 
 //ユーザー登録
-Route::post('register/create',[AuthController::class, 'userCreate'])->name('userCreate'); 
+Route::post('register/add',[AuthController::class, 'userAdd'])->name('userAdd'); 
+
+
+/*************  Product処理  *************/
+
+
+//商品新規登録画面表示
+Route::get('productAdd', [ProductController::class, 'showProductAdd']) ->name('showProductAdd');
+
+//商品登録
+Route::post('productAdd/add',[ProductController::class, 'ProductAdd'])->name('productAdd'); 
+

@@ -12,16 +12,18 @@ class Search extends Model
     protected $table = 'products';
     protected $fillable = [
         // id
-        // 商品画像
-        // 商品名
-        // 価格
-        // 在庫数
-        // メーカー名
         'id',
+        // 商品画像
         'img_path',
+        // 商品名
         'product_name',
+        // 価格
         'price',
+        // 在庫数
         'stock',
+        //コメント
+        'comment',        
+        // メーカー名
         'company_id',
 
         ];

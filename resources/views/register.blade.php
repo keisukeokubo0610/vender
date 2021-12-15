@@ -11,7 +11,7 @@
         <div class="logo">新規登録</div>
         <!-- Main Form -->
         <div class="login-form-1">
-            <form method="POST" action="{{ route('userCreate') }}" id="register-form" class="text-left">
+            <form method="POST" action="{{ route('userAdd') }}" id="register-form" class="text-left">
                 @csrf
                 <div class="login-form-main-message"></div>
                 <div class="main-login-form">
@@ -49,9 +49,9 @@
                         </div>
                         {{-- パス確認 --}}
                         <div class="form-group">
-                            <label for="password_confirm" class="sr-only">Password Confirm</label>
-                            <input type="password" class="form-control" id="password_confirm"
-                                name="password_confirm" placeholder="confirm password">
+                            <label for="password_confirmation" class="sr-only">Password Confirm</label>
+                            <input type="password" class="form-control" id="password_confirmation"
+                                name="password_confirmation" placeholder="password confirm">
                         </div>
 
                     </div>

@@ -26,28 +26,18 @@
                             </ul>
                         </div>
                     @endif
-
-
+{{-- 
+                    <x-alert type="success" :session="session('success')" />
+                     --}}
                     @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
-                    {{-- @if (session('login_error'))
-                <div class="alert alert-danger">
-                    {{ session('login_error') }}
-                </div>
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
                 @endif
-                @if (session('logout'))
-                <div class="alert alert-danger">
-                    {{ session('logout') }}
-                </div>
-                @endif --}}
+
+                  
                     {{-- 警告文 --}}
                     <x-alert type="danger" :session="session('danger')" />
-
-
 
 
                     <div class="login-group">

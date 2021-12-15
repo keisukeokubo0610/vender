@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Create;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 
 class AuthController extends Controller
@@ -54,25 +55,25 @@ class AuthController extends Controller
 
 
     // ユーザー登録
-    public function userCreate(RegisterUserRequest $request)
+    public function userAdd(RegisterUserRequest $request)
     {
 
-
-        //ユーザーのデータ受け取る
-        $inputs = $request->all();
+        
+        $credentials = $request->only('name','email', 'password');
+        Hash::make('password');
 
         DB::beginTransaction();
 
         try {
             //ユーザー登録
-            Create::create($inputs);
+            Create::create($credentials);
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollback();
             abort(500);
+
+            
         }
-
-
 
         session()->flash('success', 'ユーザー登録が完了しました。');
         return redirect(route('showLogin'));
