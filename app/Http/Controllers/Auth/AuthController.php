@@ -58,27 +58,22 @@ class AuthController extends Controller
     public function userAdd(RegisterUserRequest $request)
     {
 
-        
-        $credentials = $request->only('name','email', 'password');
-        Hash::make('password');
-
-        DB::beginTransaction();
-
         try {
-            //ユーザー登録
-            Create::create($credentials);
-            DB::commit();
+        Create::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ])->save();
+        DB::commit();
+
         } catch (\Throwable $e) {
             DB::rollback();
             abort(500);
-
-            
         }
 
         session()->flash('success', 'ユーザー登録が完了しました。');
         return redirect(route('showLogin'));
     }
-
 
     /**
      * ユーザーをアプリケーションからログアウトさせる

@@ -50,18 +50,13 @@
                             <input type="password" class="form-control" id="password" name="password"
                                 placeholder="password">
                         </div>
-                        {{-- <div class="form-group login-group-checkbox">
-                            <input type="checkbox" id="lg_remember" name="lg_remember">
-                            <label for="lg_remember">remember</label>
-                        </div> --}}
+                       
                     </div>
                     <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
                 </div>
                 <div class="etc-login-form">
-                    {{-- <p>forgot your password? <a href="#">click here</a></p> --}}
                     <p class="text-center btn-dark mt-2">新規登録はこちら→<a href="{{ route('showRegister') }}">新規登録</a></p>
                 </div>
-
             </form>
         </div>
         <!-- end:Main Form -->

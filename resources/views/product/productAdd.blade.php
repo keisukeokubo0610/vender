@@ -11,35 +11,40 @@
         <div class="logo">商品新規登録画面</div>
         <!-- Main Form -->
         <div class="login-form-1">
-            <form method="POST" action="{{ route('productAdd') }}" id="register-form" class="text-left" enctype="multipart/form-data>
-                @csrf
 
-                <div class="main-login-form">
+            <form method="POST" action="{{ route('productAdd') }}" id="register-form" class="text-left" enctype="multipart/form-data">       
+                <div class="login-form-main-message"></div>
+
+                <div class=" main-login-form">
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <x-alert type="success" :session="session('success')" />
+
+                    @csrf
+                    {{-- 商品名 --}}
                     <div class="login-group">
-
-
-
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        {{-- 商品名 --}}
                         <div class="form-group">
-                            <label for="product_name" class="sr-only">name</label>
+                            <label for="product_name" class="sr-only">商品名</label>
                             <input type="text" class="form-control" id="product_name" name="product_name" placeholder="商品名">
                         </div>
 
                         {{-- メーカー名 --}}
                         <div class="form-group">
-                            <select name="company_name" id="company_name">
-                                @foreach ($makers as $maker) 
-                                <option value="{{ $maker->company_id }}">{{ $maker->company_name }}</option>    
+                            <label for="company_id" class="sr-only">メーカー名</label>
+
+                            <select name="company_id" id="company_id" >
+                                <option name="" selected>選択してください</option>
+                                @foreach ($products as $product)
+                                    <option value="{{ $product->company_id }}">{{ $product->company_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -47,26 +52,23 @@
                         {{-- 価格 --}}
                         <div class="form-group">
                             <label for="price" class="sr-only">price</label>
-                            <input type="text" class="form-control" id="price" name="price"
-                                placeholder="価格">
+                            <input type="text" class="form-control" id="price" name="price" placeholder="価格">
                         </div>
                         {{-- 在庫数 --}}
                         <div class="form-group">
                             <label for="stock" class="sr-only">stock</label>
-                            <input type="text" class="form-control" id="stock"
-                                name="stock" placeholder="在庫数">
+                            <input type="text" class="form-control" id="stock" name="stock" placeholder="在庫数">
                         </div>
 
                         {{-- コメント --}}
                         <div class="form-group">
                             <label for="comment" class="sr-only">comment</label>
-                            <input type="comment" class="form-control" id="comment"
-                                name="text" placeholder="comment">
+                            <input type="text" class="form-control" id="comment" name="comment" placeholder="コメント">
                         </div>
 
                         {{-- 画像 --}}
                         <div class="form-group">
-                            <label for="img_path" class="sr-only">img_path</label>
+                            {{-- <label for="img_path" class="sr-only">img_path</label> --}}
                             <input type="file" name="img_path">
                         </div>
 
@@ -74,11 +76,11 @@
                     <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
                 </div>
                 <div class="etc-login-form">
-                    <button id="square_btn" onClick="history.back()">戻る</button>
+                    <button id="square_btn"><a href="{{ Route('searchProductlist') }}">商品一覧へ</a></button>
                 </div>
             </form>
         </div>
-        <!-- end:Main Form -->
     </div>
+    <!-- end:Main Form -->
 
 @endsection

@@ -36,11 +36,6 @@ Route::group(['middleware'=> ['guest']],function() {
 //ログイン後の処理
 Route::group(['middleware'=> ['auth']],function() {
     
-    // Route::get('home', function() {
-    //     return view('home');
-    // })->name('home');
-        
-        
     //ログイン後のホーム画面(商品一覧)へ
     Route::get('home',[SearchController::class, 'searchProductlist'])->name('searchProductlist');
 
