@@ -2,8 +2,7 @@
 
 @section('title', '商品新規登録')
 @section('description', '商品登録のページ')
-    @include('head')
-
+@include('head')
 @section('content')
 
     <!-- REGISTRATION FORM -->
