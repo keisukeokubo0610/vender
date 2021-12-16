@@ -12,7 +12,7 @@ class Search extends Model
     protected $table = 'products';
     protected $fillable = [
         // id
-        // 'id',
+        'id',
         // 商品画像
         'img_path',
         // 商品名

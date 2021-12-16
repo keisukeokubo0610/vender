@@ -3,21 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Create;
 use App\Models\Search;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProductFormRequest;
 use App\Http\Requests\ProductAddRequest;
+use App\Http\Requests\ProductDeleteRequest;
 use Illuminate\Support\Str;
+
 
 class ProductController extends Controller
 {
     //商品新規登録画面表示
     public function showProductAdd()
     {
-
-
         $products = Search::select([
             'product.id',
             'product.img_path',
@@ -34,7 +33,7 @@ class ProductController extends Controller
             ->get();
 
 
-        return view('product/productAdd',['products' => $products]);
+        return view('product/productAdd', ['products' => $products]);
     }
 
 
@@ -43,27 +42,7 @@ class ProductController extends Controller
     public function productAdd(ProductAddRequest $request)
     {
 
-
-        // $credentials = Search::all();
-
         $credentials = $request->all();
-
-        // $id = $request->only('product_id');
-
-        // $credentials = Search::select([
-        //     'product.comment',
-        //     // 'product.company_id',
-        //     'product.img_path',
-        //     'product.product_name',
-        //     'product.price',
-        //     'product.stock',
-        //     'company.company_name',
-        // ])
-        //     ->from('products as product')
-        //     ->join('companies as company', function ($join) {
-        //         $join->on('product.company_id', '=', 'company.id');
-        //     })
-        //     ->get();
 
 
         if (isset($credentials['img_path'])) {
@@ -90,9 +69,30 @@ class ProductController extends Controller
             abort(500);
         }
 
-        // session()->flash('success', '商品登録が完了しました。');
         return redirect(Route('showProductAdd'))->with('success', '商品登録に成功しました！');
     }
 
 
+    public function productDelete($id)
+    {
+
+        // dd(Search::find($id));
+        $searchId = Search::find($id);
+
+        if (empty($id)) {
+            //homeルートにリダイレクトする
+            return redirect(route('searchProductlist'))->with('danger', 'データがありません');
+        }
+
+
+        try {
+            //商品削除
+            $searchId->delete();
+        } catch (\Throwable $e) {
+            abort(500);
+        }
+
+        //homeルートにリダイレクトする
+        return redirect(route('searchProductlist'))->with('success', '商品が削除されました！');
+    }
 }
