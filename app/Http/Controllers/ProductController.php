@@ -18,7 +18,8 @@ use function GuzzleHttp\Promise\all;
 
 class ProductController extends Controller
 {
-    //商品新規登録画面表示
+
+    /*****    商品新規登録画面表示    *****/
     public function showProductAdd()
     {
         $products = Search::select([
@@ -36,13 +37,10 @@ class ProductController extends Controller
             })
             ->get();
 
-
         return view('product/productAdd', ['products' => $products]);
     }
 
-
-
-    // 商品登録
+    /*****    商品新規登録    *****/
     public function productAdd(ProductAddRequest $request)
     {
 
@@ -77,34 +75,10 @@ class ProductController extends Controller
     }
 
 
-    public function productDelete($id)
-    {
-
-        // dd(Search::find($id));
-        $searchId = Search::find($id);
-
-        if (empty($id)) {
-            //homeルートにリダイレクトする
-            return redirect(route('searchProductlist'))->with('danger', 'データがありません');
-        }
 
 
-        try {
-            //商品削除
-            $searchId->delete();
-        } catch (\Throwable $e) {
-            abort(500);
-        }
 
-        //homeルートにリダイレクトする
-        return redirect(route('searchProductlist'))->with('success', '商品が削除されました！');
-    }
-
-
-    /* 商品編集画面を表示
-        @param int $id
-        @return view
-    */
+    /*****    商品編集画面表示    *****/
     public function showUpdate()
     {
         $products = Search::select([
@@ -132,7 +106,7 @@ class ProductController extends Controller
     }
 
 
-    //商品編集実行
+    /*****    商品編集実行    *****/
     public function productUpdate(ProductUpdateRequest $request)
     {
         // $items = Update::find($request->id)->get();
@@ -160,10 +134,34 @@ class ProductController extends Controller
             abort(500);
         }
 
-
         return view('searchDetail', compact('product'));
 
         //homeルートにリダイレクトする
         return redirect(route('showUpdate'))->with('success', '商品が更新されました！');
+    }
+
+
+
+    /*****    商品削除    *****/
+    public function productDelete($id)
+    {
+
+        // dd(Search::find($id));
+        $searchId = Search::find($id);
+
+        if (empty($id)) {
+            //homeルートにリダイレクトする
+            return redirect(route('searchProductlist'))->with('danger', 'データがありません');
+        }
+
+        try {
+            //商品削除
+            $searchId->delete();
+        } catch (\Throwable $e) {
+            abort(500);
+        }
+
+        //homeルートにリダイレクトする
+        return redirect(route('searchProductlist'))->with('success', '商品が削除されました！');
     }
 }

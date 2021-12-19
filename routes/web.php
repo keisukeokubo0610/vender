@@ -21,19 +21,22 @@ use App\Http\Controllers\ProductController;
 /* 
     getのあと、’指定したいurl’,’どのコントローラー使うのか’
 */
-//ログイン前の処理
+
+/************************* ログイン前の処理 *************************/
 Route::group(['middleware'=> ['guest']],function() {
+
     // ログインフォーム
     Route::get('/', [AuthController::class, 'showLogin']) ->name('showLogin');
 
     // ログイン処理
     Route::post('login', [AuthController::class, 'login'])->name('login');
-
-    
+ 
 });
 
 
-//ログイン後の処理
+
+/************************* ログイン後の処理 *************************/
+
 Route::group(['middleware'=> ['auth']],function() {
     
     //ログイン後のホーム画面(商品一覧)へ
@@ -46,11 +49,10 @@ Route::group(['middleware'=> ['auth']],function() {
     //ログアウト
     Route::post('logout',
     [AuthController::class, 'logout'])->name('logout');
-        
-
 });
 
 
+/******************** ユーザー登録 ********************/
 
 //ユーザー新規登録画面表示
 Route::get('register', [AuthController::class, 'showRegister']) ->name('showRegister');
@@ -60,23 +62,27 @@ Route::get('register', [AuthController::class, 'showRegister']) ->name('showRegi
 Route::post('register/add',[AuthController::class, 'userAdd'])->name('userAdd'); 
 
 
-/*************  Product処理  *************/
 
+/********************  アイテム登録  ********************/
 
 //商品新規登録画面表示
 Route::get('/productAdd', [ProductController::class, 'showProductAdd']) ->name('showProductAdd');
+
 //商品登録
 Route::post('/productAdd/add',[ProductController::class, 'productAdd'])->name('productAdd'); 
 
 
+
+/********************  アイテム編集  ********************/
+
 //商品編集画面表示
- //商品詳細ページ
-
 Route::get('showUpdate', [ProductController::class, 'showUpdate']) ->name('showUpdate');
-
 
 //商品編集
 Route::post('/update/',[ProductController::class, 'productUpdate'])->name('productUpdate'); 
+
+
+/********************  アイテム削除  ********************/
 
 //商品削除
 Route::post('/productDelete/delete/{id}',[ProductController::class, 'productDelete'])->name('productDelete'); 
