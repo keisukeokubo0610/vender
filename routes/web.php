@@ -65,9 +65,18 @@ Route::post('register/add',[AuthController::class, 'userAdd'])->name('userAdd');
 
 //商品新規登録画面表示
 Route::get('/productAdd', [ProductController::class, 'showProductAdd']) ->name('showProductAdd');
-
 //商品登録
 Route::post('/productAdd/add',[ProductController::class, 'productAdd'])->name('productAdd'); 
+
+
+//商品編集画面表示
+ //商品詳細ページ
+
+Route::get('showUpdate', [ProductController::class, 'showUpdate']) ->name('showUpdate');
+
+
+//商品編集
+Route::post('/update/',[ProductController::class, 'productUpdate'])->name('productUpdate'); 
 
 //商品削除
 Route::post('/productDelete/delete/{id}',[ProductController::class, 'productDelete'])->name('productDelete'); 

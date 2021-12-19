@@ -22,8 +22,8 @@
                 @endif
 
                 <table class="table table-hover">
-                    {{-- @foreach ($product as $pro) --}}
-                        <tr>
+                    <tr>
+                            {{-- @foreach ($product as $pro) --}}
                             <th>id：{{ $product->id }}</th>
                             <th>商品画像：<img src="{{ '/storage/' . $product->img_path }}" alt="商品画像" class="w-10 "></th>
                             <th>商品名：{{ $product->product_name }}</th>
@@ -31,14 +31,19 @@
                             <th>価格：{{ $product->price }}</th>
                             <th>在庫数：{{ $product->stock }}</th>
                             <th>コメント：{{ $product->comment }}</th>
-
+                            <th><a href="{{ route('showUpdate') }}" class="btn btn-primary">編集</a></th>
+                           
                         </tr>
                     {{-- @endforeach --}}
 
                 </table>
 
             </div>
-            <button id="square_btn" onClick="history.back()">戻る</button>
+
+            <div class="etc-login-form">
+                <a class="btn btn-success" href="{{ route('searchProductlist') }}">商品一覧に戻る</a>
+            </div>
+            {{-- <button id="square_btn" onClick="history.back()">戻る</button> --}}
 
         </div>
     </div>

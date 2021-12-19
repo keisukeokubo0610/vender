@@ -9,8 +9,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProductFormRequest;
 use App\Http\Requests\ProductAddRequest;
 use App\Http\Requests\ProductDeleteRequest;
+use App\Http\Requests\ProductUpdateRequest;
+use App\Models\Update;
 use Illuminate\Support\Str;
 
+
+use function GuzzleHttp\Promise\all;
 
 class ProductController extends Controller
 {
@@ -94,5 +98,72 @@ class ProductController extends Controller
 
         //homeルートにリダイレクトする
         return redirect(route('searchProductlist'))->with('success', '商品が削除されました！');
+    }
+
+
+    /* 商品編集画面を表示
+        @param int $id
+        @return view
+    */
+    public function showUpdate()
+    {
+        $products = Search::select([
+            'product.id',
+            'product.img_path',
+            'product.company_id',
+            'product.product_name',
+            'product.price',
+            'product.stock',
+            'product.comment',
+            'company.company_name',
+        ])
+            ->from('products as product')
+            ->join('companies as company', function ($join) {
+                $join->on('product.company_id', '=', 'company.id');
+            })
+            ->first();
+
+        if (is_null($products)) {
+
+            return redirect(route('searchProductlist'))->with('err_msg', 'データがありません');
+        }
+
+        return view('product.update', compact('products'));
+    }
+
+
+    //商品編集実行
+    public function productUpdate(ProductUpdateRequest $request)
+    {
+        // $items = Update::find($request->id)->get();
+
+        $inputs = $request->all();
+
+
+        DB::beginTransaction();
+        try {
+            //商品編集
+            $product = Search::find($inputs['id']);
+            $product->fill([
+
+                'img_path' => $inputs['img_path'],
+                'product_name' => $inputs['product_name'],
+                'price' => $inputs['price'],
+                'stock' => $inputs['stock'],
+                'comment' => $inputs['comment'],
+                'company_name' => $inputs['company_name'],
+            ]);
+            $product->save();
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollback();
+            abort(500);
+        }
+
+
+        return view('searchDetail', compact('product'));
+
+        //homeルートにリダイレクトする
+        return redirect(route('showUpdate'))->with('success', '商品が更新されました！');
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductDeleteRequest extends FormRequest
+class ProductUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,13 @@ class ProductDeleteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id' => 'required',
+            'product_name' => 'required',
+            'company_name' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'comment' => 'required',
+            'img_path' => 'required',
         ];
     }
 }
