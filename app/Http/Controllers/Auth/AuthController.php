@@ -14,21 +14,18 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    //@return View
+
+
+    /*****    ログイン画面表示    *****/
     public function showLogin()
     {
         return view('login.login_form');
     }
 
-    /*
-    @param App\Http\Requests\LoginFormRequest;
-    $request
-    */
+    /*****    ログイン処理    *****/
     public function login(LoginFormRequest $request)
     {
-
         $credentials = $request->only('email', 'password');
-
 
         //成功した場合
         if (Auth::attempt($credentials)) {
@@ -44,17 +41,18 @@ class AuthController extends Controller
             'danger' => 'メールアドレスかパスワードが間違っています。',
         ]);
 
-        // dd($request->all());
     }
 
-    //ユーザー新規登録画面に行く
+
+
+    /*****    ユーザー新規登録画面    *****/
     public function showRegister()
     {
         return view('register');
     }
 
 
-    // ユーザー登録
+    /*****    ユーザー新規登録実行    *****/
     public function userAdd(RegisterUserRequest $request)
     {
 
@@ -75,8 +73,10 @@ class AuthController extends Controller
         return redirect(route('showLogin'));
     }
 
+
+
     /**
-     * ユーザーをアプリケーションからログアウトさせる
+     * ログアウト処理
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response

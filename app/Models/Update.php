@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-//商品検索時に使う
-class Search extends Model
+class Update extends Model
 {
     protected $table = 'products';
     protected $fillable = [
         // id
-        'id',
+        // 'id',
         // 商品画像
         'img_path',
         // 商品名
@@ -24,8 +22,7 @@ class Search extends Model
         //コメント
         'comment',        
         // メーカー名
-        'company_id',
+        'company_name',
 
         ];
 }
-

@@ -9,15 +9,10 @@ use Config\Session;
 class SearchController extends Controller
 {
 
-    /* 商品詳細画面を表示
-        @return view
-    */
-    //商品一覧をする
+    /*****    商品一覧表示    *****/
     public function searchProductlist()
     {
-        // $products = Search::all();
-        // SELECT * FROM companies INNER JOIN products ON companies.id = products.company_id;
-
+      
         $products = Search::select([
             'product.id',
             'product.img_path',
@@ -37,19 +32,14 @@ class SearchController extends Controller
     }
 
 
-    /* 商品詳細画面を表示
-        @param int $id
-        @return view
-    */
+    /*****    商品詳細表示    *****/
     public function showDetail($id)
     {
         $product = Search::find($id);
 
-
         if (is_null($product)) {
 
             return redirect(route('searchProductlist'))->with('err_msg', 'データがありません');
-
         }
 
         return view('searchDetail', ['product' => $product]);

@@ -75,7 +75,7 @@
                     <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
                 </div>
                 <div class="etc-login-form">
-                    <button id="square_btn"><a href="{{ Route('searchProductlist') }}">商品一覧へ</a></button>
+                    <a class="btn btn-success" href="{{ Route('searchProductlist') }}">商品一覧へ</a>
                 </div>
             </form>
         </div>
