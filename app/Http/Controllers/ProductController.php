@@ -10,6 +10,7 @@ use App\Http\Requests\ProductFormRequest;
 use App\Http\Requests\ProductAddRequest;
 use App\Http\Requests\ProductDeleteRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Models\Company;
 use App\Models\Update;
 use Illuminate\Support\Str;
 
@@ -22,6 +23,7 @@ class ProductController extends Controller
     /*****    商品新規登録画面表示    *****/
     public function showProductAdd()
     {
+        $makers = Company::all();
         $products = Search::select([
             'product.id',
             'product.img_path',
@@ -31,13 +33,14 @@ class ProductController extends Controller
             'product.stock',
             'company.company_name',
         ])
+
             ->from('products as product')
             ->join('companies as company', function ($join) {
                 $join->on('product.company_id', '=', 'company.id');
             })
             ->get();
-
-        return view('product/productAdd', ['products' => $products]);
+        // return view('product.update', compact('products','makers'));
+        return view('product/productAdd', compact('products', 'makers'));
     }
 
     /*****    商品新規登録    *****/
@@ -79,54 +82,45 @@ class ProductController extends Controller
 
 
     /*****    商品編集画面表示    *****/
-    public function showUpdate()
+
+    public function showUpdate($id)
     {
-        $products = Search::select([
-            'product.id',
-            'product.img_path',
-            'product.company_id',
-            'product.product_name',
-            'product.price',
-            'product.stock',
-            'product.comment',
-            'company.company_name',
-        ])
-            ->from('products as product')
-            ->join('companies as company', function ($join) {
-                $join->on('product.company_id', '=', 'company.id');
-            })
-            ->first();
+        $product = Search::find($id);
+        $makers = Company::all();
 
-        if (is_null($products)) {
+        if (is_null($product)) {
 
-            return redirect(route('searchProductlist'))->with('err_msg', 'データがありません');
+            return redirect(route('searchProductlist'))->with('danger', 'データがありません');
         }
 
-        return view('product.update', compact('products'));
+        return view('product.update', compact('product', 'makers'));
     }
+
 
 
     /*****    商品編集実行    *****/
     public function productUpdate(ProductUpdateRequest $request)
     {
-        // $items = Update::find($request->id)->get();
 
+        // 全部の値を取得
         $inputs = $request->all();
+        $makers = Company::find($request->id);
 
+        //商品編集
+        $product = Search::find($inputs['id']);
+        $product->fill([
+            'id' => $inputs['id'],
+            'img_path' => $inputs['img_path'],
+            'product_name' => $inputs['product_name'],
+            'price' => $inputs['price'],
+            'stock' => $inputs['stock'],
+            'comment' => $inputs['comment'],
+            'company_id' => $inputs['company_id'],
+            // $product->company_id = $request->company_id,
+        ]);
 
         DB::beginTransaction();
         try {
-            //商品編集
-            $product = Search::find($inputs['id']);
-            $product->fill([
-
-                'img_path' => $inputs['img_path'],
-                'product_name' => $inputs['product_name'],
-                'price' => $inputs['price'],
-                'stock' => $inputs['stock'],
-                'comment' => $inputs['comment'],
-                'company_name' => $inputs['company_name'],
-            ]);
             $product->save();
             DB::commit();
         } catch (\Throwable $e) {
@@ -134,10 +128,10 @@ class ProductController extends Controller
             abort(500);
         }
 
-        return view('searchDetail', compact('product'));
-
         //homeルートにリダイレクトする
-        return redirect(route('showUpdate'))->with('success', '商品が更新されました！');
+        return redirect(Route('searchProductlist',compact('inputs','product', 'makers')))->with('success', '商品が更新されました！');
+        // return redirect(Route('showUpdate',compact('product', 'makers')))->with('success', '商品が更新されました！');
+        // return view('product.update', compact('product', 'makers'));
     }
 
 
