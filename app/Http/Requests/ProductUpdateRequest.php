@@ -26,11 +26,11 @@ class ProductUpdateRequest extends FormRequest
         return [
             'id' => 'required',
             'product_name' => 'required',
-            'company_name' => 'required',
-            'price' => 'required',
-            'stock' => 'required',
-            'comment' => 'required',
-            'img_path' => 'required',
+            'company_id' => 'required',
+            'price' => 'required|regex:/^[0-9a-zA-Z]*$/',
+            'stock' => 'required|regex:/^[0-9a-zA-Z]*$/',
+            // 'comment' => 'required',
+            // 'img_path' => 'required',
         ];
     }
 }

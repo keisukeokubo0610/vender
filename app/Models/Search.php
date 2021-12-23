@@ -27,5 +27,6 @@ class Search extends Model
         'company_id',
 
         ];
+        
 }
 

@@ -62,6 +62,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ])->save();
+        
         DB::commit();
 
         } catch (\Throwable $e) {

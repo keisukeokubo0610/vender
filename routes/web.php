@@ -45,7 +45,6 @@ Route::group(['middleware'=> ['auth']],function() {
     //商品詳細ページ
     Route::get('/product/{id}',[SearchController::class, 'showDetail'])->name('showDetail');
 
-
     //ログアウト
     Route::post('logout',
     [AuthController::class, 'logout'])->name('logout');
@@ -62,6 +61,16 @@ Route::get('register', [AuthController::class, 'showRegister']) ->name('showRegi
 Route::post('register/add',[AuthController::class, 'userAdd'])->name('userAdd'); 
 
 
+/********************  アイテム検索  ********************/
+
+//キーワード検索
+Route::get('productlist/productSearch', [SearchController::class, 'productSearch'])->name('productSearch');
+
+//メーカー検索
+Route::get('productlist/companySearch', [SearchController::class, 'companySearch'])->name('companySearch');
+
+
+
 
 /********************  アイテム登録  ********************/
 
@@ -76,10 +85,11 @@ Route::post('/productAdd/add',[ProductController::class, 'productAdd'])->name('p
 /********************  アイテム編集  ********************/
 
 //商品編集画面表示
-Route::get('showUpdate', [ProductController::class, 'showUpdate']) ->name('showUpdate');
+Route::get('/showUpdate/{id}', [ProductController::class, 'showUpdate']) ->name('showUpdate');
 
 //商品編集
 Route::post('/update/',[ProductController::class, 'productUpdate'])->name('productUpdate'); 
+// Route::get('/redirectUpdate/', [ProductController::class, 'showUpdate']) ->name('redirectUpdate');
 
 
 /********************  アイテム削除  ********************/

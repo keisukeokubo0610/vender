@@ -2,7 +2,7 @@
 
 @section('title', '商品詳細')
 @section('description', '商品詳細のページ')
-@include('head')
+    @include('head')
 
 @section('content')
 
@@ -13,29 +13,33 @@
             {{-- 検索フォーム --}}
             <div class="container">
                 <h2>商品詳細画面</h2>
-
+     {{-- アラート表示 --}}
+     <x-alert type="success" :session="session('success')" />
+     <x-alert type="danger" :session="session('danger')" />
 
                 @if (session('err_msg'))
                     <p class="text-danger">
                         {{ session('err_msg') }}
                     </p>
                 @endif
-
                 <table class="table table-hover">
                     <tr>
-                            {{-- @foreach ($product as $pro) --}}
-                            <th>id：{{ $product->id }}</th>
-                            <th>商品画像：<img src="{{ '/storage/' . $product->img_path }}" alt="商品画像" class="w-10 "></th>
-                            <th>商品名：{{ $product->product_name }}</th>
-                            <th>メーカー：{{ $product->company_name }}</th>
-                            <th>価格：{{ $product->price }}</th>
-                            <th>在庫数：{{ $product->stock }}</th>
-                            <th>コメント：{{ $product->comment }}</th>
-                            <th><a href="{{ route('showUpdate') }}" class="btn btn-primary">編集</a></th>
-                           
-                        </tr>
-                    {{-- @endforeach --}}
+                        {{-- @foreach ($product as $pro) --}}
+                        
+                        @foreach ( $results as $result )
+                        @endforeach
 
+                        <th>id：{{ $product->id }}</th>
+                        <th>商品画像：<img src="{{ '/storage/' . $product->img_path }}" alt="商品画像" class="w-10 "></th>
+                        <th>商品名：{{ $product->product_name }}</th>
+                        <th>メーカー名：{{ $result->company_name }}</th>
+                        <th>価格：{{ $product->price }}</th>
+                        <th>在庫数：{{ $product->stock }}</th>
+                        <th>コメント：{{ $product->comment }}</th>
+                        <th><a href="{{ route('showUpdate',$product->id) }}" class="btn btn-primary">編集</a></th>
+                        
+                    </tr>
+                    {{-- @endforeach --}}
                 </table>
 
             </div>

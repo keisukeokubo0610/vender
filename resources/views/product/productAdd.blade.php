@@ -39,11 +39,10 @@
                         {{-- メーカー名 --}}
                         <div class="form-group">
                             <label for="company_id" class="sr-only">メーカー名</label>
-
                             <select name="company_id" id="company_id" >
                                 <option name="" selected>選択してください</option>
-                                @foreach ($products as $product)
-                                    <option value="{{ $product->company_id }}">{{ $product->company_name }}</option>
+                                @foreach ($makers as $maker)
+                                    <option value="{{ $maker->id }}">{{ $maker->company_name }}</option>
                                 @endforeach
                             </select>
                         </div>
