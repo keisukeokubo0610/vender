@@ -78,39 +78,6 @@ class ProductController extends Controller
 
 
 
-
-    // /*****    商品編集画面表示 （偽物）   *****/
-    // public function showUpdate()
-    // {
-    //     $makers = Company::all();
-    //     $products = Search::select([
-    //         'product.id',
-    //         'product.img_path',
-    //         'product.company_id',
-    //         'product.product_name',
-    //         'product.price',
-    //         'product.stock',
-    //         'product.comment',
-    //         'company.company_name',
-    //     ])
-    //         ->from('products as product')
-    //         ->join('companies as company', function ($join) {
-    //             $join->on('product.company_id', '=', 'company.id');
-    //         })
-    //         ->where('product.id',)
-    //         ->first();
-
-    //     if (is_null($products)) {
-
-    //         return redirect(route('searchProductlist'))->with('err_msg', 'データがありません');
-    //     }
-
-    //     return view('product.update', compact('products','makers'));
-    // }
-
-
-
-
      /*****    商品編集画面表示 (本物)   *****/
 
      public function showUpdate($id)
