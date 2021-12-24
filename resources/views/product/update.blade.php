@@ -25,7 +25,7 @@
 
         <div class="login-form-1">
             {{-- <form method="POST" action="{{ route('userUpdate') }}" id="register-form" class="text-left"> --}}
-            <form method="POST" action="{{ route('productUpdate',$product->id) }}" id="register-form" class="text-left">
+            <form method="POST" action="{{ route('productUpdate',$products->id) }}" id="register-form" class="text-left">
                 @csrf
                 <div class="login-form-main-message"></div>
                 <div class="main-login-form">
@@ -45,13 +45,13 @@
                         {{-- @foreach ($products as $product) --}}
                         {{-- 商品ID --}}
                         <div class="form-group">
-                            <input value="{{ $product->id }}" type="hidden" class="form-control" name="id">
+                            <input value="{{ $products->id }}" type="hidden" class="form-control" name="id">
                         </div>
 
                         {{-- 商品名 --}}
                         <div class="form-group">
                             <label for="product_name" class="sr-only">商品名</label>
-                            <input value="{{ $product->product_name }}" type="text" class="form-control" id="product_name" name="product_name">
+                            <input value="{{ $products->product_name }}" type="text" class="form-control" id="product_name" name="product_name">
                         </div>
 
                         {{-- メーカー --}}
@@ -67,25 +67,25 @@
                         {{-- 価格 --}}
                         <div class="form-group">
                             <label for="price" class="sr-only">価格</label>
-                            <input value="{{ $product->price }}" type="text" class="form-control" id="price"
+                            <input value="{{ $products->price }}" type="text" class="form-control" id="price"
                                 name="price" >
                         </div>
                         {{-- 在庫 --}}
                         <div class="form-group">
                             <label for="stock" class="sr-only">在庫</label>
-                            <input value="{{ $product->stock }}" type="text" class="form-control" id="stock" name="stock"
+                            <input value="{{ $products->stock }}" type="text" class="form-control" id="stock" name="stock"
                                 placeholder="stock">
                         </div>
                         {{-- コメント --}}
                         <div class="form-group">
                             <label for="comment" class="sr-only">コメント</label>
-                            <input value="{{ $product->comment }}" type="text" class="form-control" id="comment"
+                            <input value="{{ $products->comment }}" type="text" class="form-control" id="comment"
                                 name="comment" placeholder="">
                         </div>
                         {{-- 画像 --}}
                         <div class="form-group">
                             <label for="img_path" class="sr-only">画像</label>
-                            <input value="{{ '/storage/' .$product->img_path }}" type="text" class="form-control" id="img_path" name="img_path"
+                            <input value="{{ '/storage/' .$products->img_path }}" type="text" class="form-control" id="img_path" name="img_path"
                                 placeholder="">
                         </div>
                       {{-- @endforeach --}}
