@@ -78,17 +78,16 @@
                 </div> --}}
 
 
+                <h2>商品追加フォーム</h2>
                 <div class="etc-login-form">
-                    <h2>商品追加フォーム</h2>
-                    <p class="text-center btn btn-dark mt-2">商品新規登録はこちら → <button><a
-                                href="{{ route('showProductAdd') }}">新規登録</a></button></p>
+                    <a class="btn btn-success" href="{{ route('showProductAdd') }}">商品新規登録</a>
+                    
+                    
+                    <form action="{{ Route('logout') }}" method="post" class="container">
+                        @csrf
+                        <button class="mt-3 btn btn-danger">ログアウト</button>
+                    </form>
                 </div>
-
-
-                <form action="{{ Route('logout') }}" method="post" class="container">
-                    @csrf
-                    <button class="mt-3 btn btn-danger">ログアウト</button>
-                </form>
             </div>
         </div>
     @endsection

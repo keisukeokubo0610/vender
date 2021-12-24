@@ -38,7 +38,7 @@ class SearchController extends Controller
     public function showDetail($id)
     {
 
-        $makers = Company::all();
+        // $makers = Company::all();
         $product = Search::find($id);
 
         $results = DB::table('products as product')
@@ -54,6 +54,7 @@ class SearchController extends Controller
             ->join('companies as company', function ($join) {
                 $join->on('product.company_id', '=', 'company.id');
             })
+            ->where('product.id',$id)
             ->get();
 
         
@@ -62,7 +63,7 @@ class SearchController extends Controller
             return redirect(route('searchProductlist'))->with('danger', 'データがありません');
         }
         
-        return view('searchDetail', compact('results','makers','product'));
+        return view('searchDetail', compact('results','product'));
     }
 
 

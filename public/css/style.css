@@ -23,7 +23,7 @@ a:hover {
 
 .etc-login-form {
     color: #919191;
-    padding: 10px 20px;
+    display: flex;
 }
 
 .etc-login-form p {
