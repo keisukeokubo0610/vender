@@ -26,16 +26,14 @@
                             </ul>
                         </div>
                     @endif
-{{-- 
-                    <x-alert type="success" :session="session('success')" />
-                     --}}
+                    {{-- <x-alert type="success" :session="session('success')" /> --}}
                     @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
 
-                  
+
                     {{-- 警告文 --}}
                     <x-alert type="danger" :session="session('danger')" />
 
@@ -50,12 +48,12 @@
                             <input type="password" class="form-control" id="password" name="password"
                                 placeholder="password">
                         </div>
-                       
+
                     </div>
                     <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
                 </div>
                 <div class="etc-login-form">
-                    <p class="text-center btn-dark mt-2">新規登録はこちら→<a href="{{ route('showRegister') }}">新規登録</a></p>
+                    <a class="btn btn-success" href="{{ route('showRegister') }}">ユーザー新規登録</a>
                 </div>
             </form>
         </div>

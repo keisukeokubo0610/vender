@@ -24,6 +24,7 @@ a:hover {
 .etc-login-form {
     color: #919191;
     display: flex;
+    margin-top: 20px;
 }
 
 .etc-login-form p {
