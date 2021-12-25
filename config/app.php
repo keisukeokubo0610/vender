@@ -139,6 +139,9 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        // ソート追加
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
+
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,

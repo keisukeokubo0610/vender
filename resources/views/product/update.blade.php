@@ -85,8 +85,8 @@
                         {{-- 画像 --}}
                         <div class="form-group">
                             <label for="img_path" class="sr-only">画像</label>
-                            <input value="{{ '/storage/' .$products->img_path }}" type="text" class="form-control" id="img_path" name="img_path"
-                                placeholder="">
+                            <input value="{{ $products->img_path }}" type="text" class="form-control" id="img_path" name="img_path"
+                            >
                         </div>
                       {{-- @endforeach --}}
 

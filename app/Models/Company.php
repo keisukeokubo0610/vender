@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Search;
 
 //
 class Company extends Model
@@ -14,4 +14,8 @@ class Company extends Model
         'id',
         'company_name',
     ];
+    public function search()
+    {
+        return $this->hasOne(Search::class);
+    }
 }

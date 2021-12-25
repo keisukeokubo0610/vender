@@ -12,8 +12,9 @@ class SearchController extends Controller
 {
 
     /*****    商品一覧表示    *****/
-    public function searchProductlist()
+    public function searchProductlist(Request $request)
     {
+
         $products = Search::select([
             'product.id',
             'product.img_path',
@@ -26,6 +27,7 @@ class SearchController extends Controller
             ->join('companies as company', function ($join) {
                 $join->on('product.company_id', '=', 'company.id');
             })
+            // ->sortable('item_sort')
             ->orderBy('product.id', 'desc')
             ->get();
 
@@ -33,6 +35,39 @@ class SearchController extends Controller
 
         return view('/home', compact('products', 'makers'));
     }
+
+    //ソート機能
+    public function index(Request $request)
+    {
+        // $index = Search::select([
+        //         'id',
+        //         'price',
+        //         'stock',
+        //         // 'company.company_name',
+        //     ])
+        //         ->sortable()
+        //         ->orderBy('id', 'desc')
+        //         ->get();
+            
+            $products = Search::select([
+                'products.id',
+                'products.img_path',
+                'products.product_name',
+                'products.price',
+                'products.stock',
+                'companies.company_name',
+                ])
+                ->from('products')
+                ->join('companies','products.company_id', '=', 'companies.id')
+                ->sortable('')
+                ->orderBy('products.id', 'desc')
+                ->get();
+                
+                $makers = Company::all();
+                return view('/home', compact('products', 'makers'));
+            }
+            
+
 
 
     /*****    商品詳細表示    *****/
@@ -185,38 +220,38 @@ class SearchController extends Controller
 
 
 
-    /*****    ソート    *****/
-    public function stockSort(Request $request)
-    {
-        // $makers = Company::all();
-        $stock = $request->get('stock');
+    // /*****    ソート    *****/
+    // public function stockSort(Request $request)
+    // {
+    //     // $makers = Company::all();
+    //     $stock = $request->get('stock');
 
 
-        $request = collect(['id', 'price','stock']);
+    //     $request = collect(['id', 'price','stock']);
 
-        $sorted = $request->sort();
-        
-        $sorted->values()->all();
+    //     $sorted = $request->sort();
 
-
+    //     $sorted->values()->all();
 
 
-        $products = Search::select([
-            'product.id',
-            'product.img_path',
-            'product.product_name',
-            'product.price',
-            'product.stock',
-            'company.company_name',
-        ])
-            ->from('products as product')
-            ->join('companies as company', function ($join) {
-                $join->on('product.company_id', '=', 'company.id');
-            })
-            ->where('stock', $stock)
-            ->get();
 
 
-        return view('home', compact('products', 'makers'));
-    }
+    //     $products = Search::select([
+    //         'product.id',
+    //         'product.img_path',
+    //         'product.product_name',
+    //         'product.price',
+    //         'product.stock',
+    //         'company.company_name',
+    //     ])
+    //         ->from('products as product')
+    //         ->join('companies as company', function ($join) {
+    //             $join->on('product.company_id', '=', 'company.id');
+    //         })
+    //         ->where('stock', $stock)
+    //         ->get();
+
+
+    //     return view('home', compact('products', 'makers'));
+    // }
 }

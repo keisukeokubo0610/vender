@@ -75,7 +75,8 @@ Route::get('productlist/priceSearch', [SearchController::class, 'priceSearch'])-
 //在庫検索
 Route::get('productlist/stockSearch', [SearchController::class, 'stockSearch'])->name('stockSearch');
 
-
+//ソート
+Route::get('productlist/sort', [SearchController::class, 'index'])->name('index');
 
 /********************  アイテム登録  ********************/
 

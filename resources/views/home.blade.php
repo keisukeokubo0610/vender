@@ -76,6 +76,20 @@
 
 
 
+                    <form action="{{ route('index') }}" method='get'>
+                        <button type="submit" name="sort" class="btn">@sortablelink('id', 'id')</button>
+                        <button type="submit" name="sort" class="btn">@sortablelink('price', '価格')</button>
+                        <button type="submit" name="sort" class="btn">@sortablelink('stock', '在庫数')</button>
+
+                        {{-- @foreach ($index as $list)
+                            {{ $list->id }}
+                            {{ $list->stock }}
+                            {{ $list->price }}
+
+
+                        @endforeach --}}
+
+
                 </div>
 
 
@@ -103,7 +117,7 @@
 
                     </table>
                 </div>
-
+                </form>
                 {{-- <div class="d-flex justify-content-center ">
                     {{ $pagenate->links() }}
                 </div> --}}
