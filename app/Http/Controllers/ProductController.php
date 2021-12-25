@@ -23,6 +23,7 @@ class ProductController extends Controller
     /*****    商品新規登録画面表示    *****/
     public function showProductAdd()
     {
+        $makers = Company::all();
         $products = Search::select([
             'product.id',
             'product.img_path',
@@ -38,7 +39,7 @@ class ProductController extends Controller
             })
             ->get();
 
-        return view('product/productAdd', ['products' => $products]);
+        return view('product/productAdd', compact('products','makers'));
     }
 
     /*****    商品新規登録    *****/
@@ -78,7 +79,7 @@ class ProductController extends Controller
 
 
 
-     /*****    商品編集画面表示 (本物)   *****/
+     /*****    商品編集画面表示    *****/
 
      public function showUpdate($id)
      {
