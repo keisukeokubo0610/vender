@@ -50,7 +50,6 @@ class SearchController extends Controller
             'product.stock',
             'company.company_name',
             ])
-            // ->from('products as product')
             ->join('companies as company', function ($join) {
                 $join->on('product.company_id', '=', 'company.id');
             })
@@ -70,8 +69,12 @@ class SearchController extends Controller
     // キーワード検索
     public function productSearch(Request $request)
     {
-        $makers = Company::all();
+        //入力された文字
         $word = $request->get('word');
+        $makers = Company::all();
+
+
+        //あいまい検索
         if ($word !== null) {
             $escape_word = addcslashes($word, '\\_%');
             $products = Search::where('product_name', 'like', '%' . $escape_word . '%')->get();
