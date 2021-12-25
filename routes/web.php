@@ -69,6 +69,11 @@ Route::get('productlist/productSearch', [SearchController::class, 'productSearch
 //メーカー検索
 Route::get('productlist/companySearch', [SearchController::class, 'companySearch'])->name('companySearch');
 
+//価格検索
+Route::get('productlist/priceSearch', [SearchController::class, 'priceSearch'])->name('priceSearch');
+
+//在庫検索
+Route::get('productlist/stockSearch', [SearchController::class, 'stockSearch'])->name('stockSearch');
 
 
 

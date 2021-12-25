@@ -21,14 +21,15 @@ class SearchController extends Controller
             'product.price',
             'product.stock',
             'company.company_name',
-            ])
+        ])
             ->from('products as product')
             ->join('companies as company', function ($join) {
                 $join->on('product.company_id', '=', 'company.id');
             })
+            ->orderBy('product.id', 'desc')
             ->get();
-            
-            $makers = Company::all();
+
+        $makers = Company::all();
 
         return view('/home', compact('products', 'makers'));
     }
@@ -42,31 +43,32 @@ class SearchController extends Controller
         $product = Search::find($id);
 
         $results = DB::table('products as product')
-        ->select([
-            'product.id',
-            'product.img_path',
-            'product.product_name',
-            'product.price',
-            'product.stock',
-            'company.company_name',
+            ->select([
+                'product.id',
+                'product.img_path',
+                'product.product_name',
+                'product.price',
+                'product.stock',
+                'company.company_name',
             ])
             ->join('companies as company', function ($join) {
                 $join->on('product.company_id', '=', 'company.id');
             })
-            ->where('product.id',$id)
+            ->where('product.id', $id)
             ->get();
 
-        
+
         if (is_null($product)) {
-            
+
             return redirect(route('searchProductlist'))->with('danger', 'データがありません');
         }
-        
-        return view('searchDetail', compact('results','product'));
+
+        return view('searchDetail', compact('results', 'product'));
     }
 
 
-    // キーワード検索
+
+    /*****    キーワード検索    *****/
     public function productSearch(Request $request)
     {
         //入力された文字
@@ -84,18 +86,19 @@ class SearchController extends Controller
         return view('home', compact('products', 'makers'));
     }
 
-    // 会社検索
+
+    /*****    メーカー検索    *****/
     public function companySearch(Request $request)
     {
 
         $makers = Company::all();
         $company = $request->get('company_name');
-        
+
         if (is_null($company)) {
             $products = Search::all();
             return redirect(route('searchProductlist'))->with('danger', 'データがありません');
         }
-        
+
         $products = Search::select([
             'product.id',
             'product.img_path',
@@ -108,10 +111,112 @@ class SearchController extends Controller
             ->join('companies as company', function ($join) {
                 $join->on('product.company_id', '=', 'company.id');
             })
-            ->where('company_name',$company)
+            ->where('company_name', $company)
             ->get();
 
+
+        return view('home', compact('products', 'makers'));
+    }
+
+
+    /*****    価格検索    *****/
+    public function priceSearch(Request $request)
+    {
+        $makers = Company::all();
+        $price = $request->get('price');
+
+        if (is_null($price)) {
+            $products = Search::all();
+            return redirect(route('searchProductlist'))->with('danger', 'データがありません');
+        }
+
+        $products = Search::select([
+            'product.id',
+            'product.img_path',
+            'product.product_name',
+            'product.price',
+            'product.stock',
+            'company.company_name',
+        ])
+            ->from('products as product')
+            ->join('companies as company', function ($join) {
+                $join->on('product.company_id', '=', 'company.id');
+            })
+            ->where('price', $price)
+            ->get();
+
+
+        return view('home', compact('products', 'makers'));
+    }
+
+
+
+
+    /*****    ストック検索    *****/
+    public function stockSearch(Request $request)
+    {
+
+        $makers = Company::all();
+        $stock = $request->get('stock');
+
+        if (is_null($stock)) {
+            $products = Search::all();
+            return redirect(route('searchProductlist'))->with('danger', 'データがありません');
+        }
+
+        $products = Search::select([
+            'product.id',
+            'product.img_path',
+            'product.product_name',
+            'product.price',
+            'product.stock',
+            'company.company_name',
+        ])
+            ->from('products as product')
+            ->join('companies as company', function ($join) {
+                $join->on('product.company_id', '=', 'company.id');
+            })
+            ->where('stock', $stock)
+            ->get();
+
+
+        return view('home', compact('products', 'makers'));
+    }
+
+
+
+    /*****    ソート    *****/
+    public function stockSort(Request $request)
+    {
+        // $makers = Company::all();
+        $stock = $request->get('stock');
+
+
+        $request = collect(['id', 'price','stock']);
+
+        $sorted = $request->sort();
         
+        $sorted->values()->all();
+
+
+
+
+        $products = Search::select([
+            'product.id',
+            'product.img_path',
+            'product.product_name',
+            'product.price',
+            'product.stock',
+            'company.company_name',
+        ])
+            ->from('products as product')
+            ->join('companies as company', function ($join) {
+                $join->on('product.company_id', '=', 'company.id');
+            })
+            ->where('stock', $stock)
+            ->get();
+
+
         return view('home', compact('products', 'makers'));
     }
 }

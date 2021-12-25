@@ -361,10 +361,11 @@ tr {
 .search-container {
     width: 100%;
     margin: 50px 0;
-    display: flex;
+    /* display: flex; */
 }
 
 .search-form {
+    display: flex;
     width: 30%;
     height: 30px;
     margin-right: 20px;
@@ -376,6 +377,11 @@ tr {
 
 .search-form button {
     margin-left: 25px;
+}
+
+.search-group {
+    width: 25%;
+    margin: 15px 0;
 }
 
 .products-container {
