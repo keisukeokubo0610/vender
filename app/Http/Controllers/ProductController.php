@@ -156,4 +156,15 @@ class ProductController extends Controller
         //homeルートにリダイレクトする
         return redirect(route('searchProductlist'))->with('success', '商品が削除されました！');
     }
+
+
+    //削除（非同期処理）
+    public function destroy(Request $request, Search $user) {
+        $user = Search::findOrFail($request->id);
+        $user->delete();
+    }
+
+
+
+
 }

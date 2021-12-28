@@ -108,11 +108,8 @@
                                 <form class="form-inline btn" action="{{ route('productDelete', $product->id) }}"
                                     method="POST">
                                     @csrf
-                                    {{-- <th><button type="submit" class="btn btn-danger"
-                                            onClick="delete_alert(event);return false;">削除</button></th> --}}
-
-                                <th><button id="deleteTarget" data-product-id="{{ $product->id }}" class="btn btn-danger">削除</button></th>
-
+                                    <th><button type="submit" class="btn btn-danger"
+                                            onClick="delete_alert(event);return false;">削除</button></th>
                                 </form>
                                 <br>
                             </tr>
