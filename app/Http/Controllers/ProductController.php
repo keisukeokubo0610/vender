@@ -39,7 +39,7 @@ class ProductController extends Controller
             })
             ->get();
 
-        return view('product/productAdd', compact('products','makers'));
+        return view('product/productAdd', compact('products', 'makers'));
     }
 
     /*****    商品新規登録    *****/
@@ -79,20 +79,20 @@ class ProductController extends Controller
 
 
 
-     /*****    商品編集画面表示    *****/
+    /*****    商品編集画面表示    *****/
 
-     public function showUpdate($id)
-     {
-         $products = Search::find($id);
-         $makers = Company::all();
- 
-         if (is_null($products)) {
- 
-             return redirect(route('searchProductlist'))->with('danger', 'データがありません');
-         }
- 
-         return view('product.update', compact('products', 'makers'));
-     }
+    public function showUpdate($id)
+    {
+        $products = Search::find($id);
+        $makers = Company::all();
+
+        if (is_null($products)) {
+
+            return redirect(route('searchProductlist'))->with('danger', 'データがありません');
+        }
+
+        return view('product.update', compact('products', 'makers'));
+    }
 
 
 
@@ -116,8 +116,8 @@ class ProductController extends Controller
             'stock' => $inputs['stock'],
             'comment' => $inputs['comment'],
             'company_id' => $inputs['company_id'],
-            ]);
-            try {
+        ]);
+        try {
             $products->save();
             DB::commit();
         } catch (\Throwable $e) {
@@ -129,42 +129,33 @@ class ProductController extends Controller
         return redirect()->route('showUpdate', ['id' => $request->id])->with('success', '商品が更新されました！');
     }
 
+    // /*****    商品削除    *****/
+    // public function productDelete($id)
+    // {
 
+    //     $searchId = Search::find($id);
 
+    //     if (empty($id)) {
+    //         //homeルートにリダイレクトする
+    //         return redirect(route('searchProductlist'))->with('danger', 'データがありません');
+    //     }
 
+    //     try {
+    //         //商品削除
+    //         $searchId->delete();
+    //     } catch (\Throwable $e) {
+    //         abort(500);
+    //     }
 
-
-    /*****    商品削除    *****/
-    public function productDelete($id)
-    {
-
-        // dd(Search::find($id));
-        $searchId = Search::find($id);
-
-        if (empty($id)) {
-            //homeルートにリダイレクトする
-            return redirect(route('searchProductlist'))->with('danger', 'データがありません');
-        }
-
-        try {
-            //商品削除
-            $searchId->delete();
-        } catch (\Throwable $e) {
-            abort(500);
-        }
-
-        //homeルートにリダイレクトする
-        return redirect(route('searchProductlist'))->with('success', '商品が削除されました！');
-    }
-
+    //     //homeルートにリダイレクトする
+    //     return redirect(route('searchProductlist'))->with('success', '商品が削除されました！');
+    // }
 
     //削除（非同期処理）
-    public function destroy(Request $request, Search $user) {
-        $user = Search::findOrFail($request->id);
-        $user->delete();
+    public function destroy(Request $request, Search $search)
+    {
+
+        $search = Search::findOrFail($request->id);
+        $search->delete($request->id);
     }
-
-
-
-
 }

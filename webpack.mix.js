@@ -19,7 +19,9 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/productDelete.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
+    .js('resources/js/productSearch.js', 'public/js')
+    .js('resources/js/productList.js', 'public/js')
+    // .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps()
     .autoload({
         "jquery": ['$', 'window.jQuery'],

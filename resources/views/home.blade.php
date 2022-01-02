@@ -5,7 +5,6 @@
     @include('head')
 
 @section('content')
-
     <div class="container">
         <div class="mt-5">
 
@@ -27,7 +26,7 @@
                     <div class="search-group">
                         <form class="search-form" action="{{ route('productSearch') }}">
                             @csrf
-                            <input type="text" name="word" placeholder="キーワード検索">
+                            <input id="search-word" type="text" name="word" placeholder="キーワード検索">
                             <button type="submit" class="btn btn-success">検索する</button>
                         </form>
                     </div>
@@ -80,22 +79,17 @@
                         <button type="submit" name="sort" class="btn">@sortablelink('id', 'id')</button>
                         <button type="submit" name="sort" class="btn">@sortablelink('price', '価格')</button>
                         <button type="submit" name="sort" class="btn">@sortablelink('stock', '在庫数')</button>
-
-                        {{-- @foreach ($index as $list)
-                            {{ $list->id }}
-                            {{ $list->stock }}
-                            {{ $list->price }}
-
-
-                        @endforeach --}}
-
-
+                    </form>
                 </div>
 
-
+                {{-- 商品一覧ここで表示 --}}
                 <div class="products-container">
-                    <table class="table table-hover">
-                        @foreach ($products as $product)
+                    {{-- <button id="addcontent" type="button">ここ！</button> --}}
+
+
+                    <table id="product_table" class="table table-hover">
+                        @csrf
+                        {{-- @foreach ($products as $product)
                             <tr>
                                 <th>id：{{ $product->id }}</th>
                                 <th>商品画像：<img src="{{ '/storage/' . $product->img_path }}" alt="商品画像"></th>
@@ -108,22 +102,15 @@
                                 <form class="form-inline btn" action="{{ route('productDelete', $product->id) }}"
                                     method="POST">
                                     @csrf
-                                    {{-- <th><button type="submit" class="btn btn-danger"
-                                            onClick="delete_alert(event);return false;">削除</button></th> --}}
 
-                                <th><button id="deleteTarget" data-product-id="{{ $product->id }}" class="btn btn-danger">削除</button></th>
-
+                                <th><button id="deleteTarget" data-product-id="{{ $product->id }}" class="btn btn-danger" onClick="delete_alert(event);return false;">削除</button></th>
                                 </form>
                                 <br>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
 
                     </table>
                 </div>
-                </form>
-                {{-- <div class="d-flex justify-content-center ">
-                    {{ $pagenate->links() }}
-                </div> --}}
 
 
                 <h2>商品追加フォーム</h2>
