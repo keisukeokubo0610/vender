@@ -1,49 +1,79 @@
-$('.user-search-form .search-icon').on('click', function() {
-    $('.user-table tbody').empty(); //もともとある要素を空にする
-    $('.search-null').remove(); //検索結果が0のときのテキストを消す
+/* Ajax通信開始 */
+$(function() {
+    // $('#get_name').on('click', 'button', function() {
+    $('#getName').on('click', function() {
 
-    let userName = $('#search_name').val(); //検索ワードを取得
+        $('#product_table').empty(); //もともとある要素を空にする
 
-    if (!userName) {
-        return false;
-    } //ガード節で検索ワードが空の時、ここで処理を止めて何もビューに出さない
+        console.log('検索作動！');
 
-    $.ajax({
-        type: 'GET',
-        url: '/user/index/' + userName, //後述するweb.phpのURLと同じ形にする
-        data: {
-            'search_name': userName, //ここはサーバーに贈りたい情報。今回は検索ファームのバリューを送りたい。
-        },
-        dataType: 'json', //json形式で受け取る
+        var searchName = $('#search_name').val(); //検索ワードを取得
 
-        beforeSend: function() {
-                $('.loading').removeClass('display-none');
-            } //通信中の処理をここで記載。今回はぐるぐるさせるためにcssでスタイルを消す。
-    }).done(function(data) {}).done(function(data) { //ajaxが成功したときの処理
-        $('.loading').addClass('display-none'); //通信中のぐるぐるを消す
-        let html = '';
-        $.each(data, function(index, value) { //dataの中身からvalueを取り出す
-            　　　　 //ここの記述はリファクタ可能
-            let id = value.id;
-            let name = value.name;
-            let avatar = value.avatar;
-            let itemsCount = value.items_count;　　　　 // １ユーザー情報のビューテンプレートを作成
-            html = `
-                                    <tr class="user-list">
-                                        <td class="col-xs-2"><img src="${avatar}" class="rounded-circle user-avatar"></td>
-                                        <td class="col-xs-3">${name}</td>
-                                        <td class="col-xs-2">${itemsCount}</td>
-                                        <td class="col-xs-5"><a class="btn btn-info" href="/user/${id}">詳細</a></td>
-                                    </tr>
-                                        `
+        console.log(searchName);
+
+
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: 'GET',
+            url: '/home/ajax' + searchName, //後述するweb.phpのURLと同じ形にする
+            data: {
+                'search_name': searchName //ここはサーバーに贈りたい情報。今回は検索ファームのバリューを送りたい。
+            },
+            dataType: 'json', //json形式で受け取る
+
+            // beforeSend: function() {
+            //         $('.loading').removeClass('display-none');
+            //     } //通信中の処理をここで記載。今回はぐるぐるさせるためにcssでスタイルを消す。
         })
-        $('.user-table tbody').append(html); //できあがったテンプレートをビューに追加
-        　　　 // 検索結果がなかったときの処理
-        if (data.length === 0) {
-            $('.user-index-wrapper').after('<p class="text-center mt-5 search-null">ユーザーが見つかりません</p>');
-        }
 
-    }).fail(function() {　　　 //ajax通信がエラーのときの処理
-        console.log('どんまい！');
+
+        .done(function(data) { //ajaxが成功したときの処理
+            console.log('ajax成功！');
+            // $('.loading').addClass('display-none'); //通信中のぐるぐるを消す
+            $.each(data, function(index, value) { //dataの中身からvalueを取り出す
+                    //ここの記述はリファクタ可能
+                    // オブジェクトや値を JSON 文字列に変換
+                    var data_stringify = JSON.stringify(data);
+                    var data_json = JSON.parse(data_stringify);
+                    console.log(data_json);
+
+
+                    var i = 0;
+                    for (i = 0; i < value.length; i++) {　　　 // １ユーザー情報のビューテンプレートを作成
+
+
+                        addhtml = `
+            
+            <tr>
+                <th>id： ${value[i].id}</th>
+                <th>商品画像：<img src="/storage/${value[i].img_path}" alt="商品画像"></th>
+                <th>商品名：${value[i].product_name}</th>
+                <th>価格：${value[i].price}</th>
+                <th>在庫数：${value[i].stock}</th>
+                <th>メーカー名：${value[i].company_name}</th>
+                <th><a href="/product/${value[i].id}" class="btn btn-primary">詳細</a></th>
+
+                <form class="form-inline btn" action="{{ route('productDelete', ${value[i].id}) }}"
+                    method="POST">
+                    @csrf
+
+                <th><button value="{{ csrf_token() }}" id="deleteTarget" data-product-id="${value[i].id}" class="btn btn-danger">削除</button></th>
+
+                </form>
+                <br>
+            </tr>
+            `;
+                        // console.log('送るかな！');
+                        $('#product_table').append(addhtml); //できあがったテンプレートをビューに追加
+                    }
+                }) //できあがったテンプレートをビューに追加
+                　　　 // 検索結果がなかったときの処理
+            if (data.length === 0) {
+                $('.products-index-wrapper').after('<p class="text-center mt-5 search-null">商品が見つかりません</p>');
+            }
+
+        }).fail(function() {　　　 //ajax通信がエラーのときの処理
+            console.log('どんまい！');
+        })
     })
 });

@@ -14,6 +14,7 @@
         <script src="{{ mix('js/productDelete.js') }}"></script>
         <script src="{{ mix('js/productList.js') }}"></script>
         <script src="{{ mix('js/productSearch.js') }}"></script>
+
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
         <title>@yield('title')</title>

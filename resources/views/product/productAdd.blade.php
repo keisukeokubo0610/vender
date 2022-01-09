@@ -67,7 +67,7 @@
                         {{-- 画像 --}}
                         <div class="form-group">
                             {{-- <label for="img_path" class="sr-only">img_path</label> --}}
-                            <input type="file" name="img_path">
+                            <input type="file" name="img_path" accept="image/*">
                         </div>
 
                     </div>

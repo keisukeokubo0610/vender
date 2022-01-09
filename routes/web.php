@@ -70,8 +70,10 @@ Route::post('register/add', [AuthController::class, 'userAdd'])->name('userAdd')
 /********************  アイテム検索  ********************/
 
 //キーワード検索
-Route::get('home/productSearch', [SearchController::class, 'productSearch'])->name('productSearch');
-Route::get('home/productSearch', [SearchController::class, 'productSearch'])->name('productSearch');
+// Route::get('home/search/', [SearchController::class, 'productSearch'])->name('productSearch');
+
+Route::match(['get', 'post'],'/home/ajax{search_name}',[AjaxController::class, 'getNameSearch'])->name('getNameSearch');
+
 
 //メーカー検索
 Route::get('home/companySearch', [SearchController::class, 'companySearch'])->name('companySearch');
@@ -108,6 +110,4 @@ Route::post('/update/', [ProductController::class, 'productUpdate'])->name('prod
 /********************  アイテム削除  ********************/
 
 //商品削除
-// Route::post('/productDelete/delete/{id}', [ProductController::class, 'productDelete'])->name('productDelete');
-
 Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('destroy');

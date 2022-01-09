@@ -18,18 +18,22 @@
 
             {{-- 検索フォーム --}}
             <div class="container">
-                <h2>商品一覧画面</h2>
+                <h2 class="getProductsList">商品一覧画面</h2>
 
-                <div class="search-container">
+                <div class="search-container products-index-wrapper">
 
                     {{-- キーワード検索 --}}
                     <div class="search-group">
-                        <form class="search-form" action="{{ route('productSearch') }}">
-                            @csrf
-                            <input id="search-word" type="text" name="word" placeholder="キーワード検索">
-                            <button type="submit" class="btn btn-success">検索する</button>
-                        </form>
+                        {{-- <form class="search-form" action="{{ route('productSearch') }}"> --}}
+                            <label for="search_name"></label>
+
+                        <input id="search_name" type="text" name="search_name" placeholder="キーワード検索">
+                        <button id="getName" type="button" class="btn btn-success">検索する</button>
+                        {{-- </form> --}}
                     </div>
+
+
+                    
 
                     {{-- メーカー検索 --}}
                     <div class="search-group">
@@ -76,6 +80,7 @@
 
 
                     <form action="{{ route('index') }}" method='get'>
+                        @csrf
                         <button type="submit" name="sort" class="btn">@sortablelink('id', 'id')</button>
                         <button type="submit" name="sort" class="btn">@sortablelink('price', '価格')</button>
                         <button type="submit" name="sort" class="btn">@sortablelink('stock', '在庫数')</button>
@@ -83,12 +88,13 @@
                 </div>
 
                 {{-- 商品一覧ここで表示 --}}
-                <div class="products-container">
+                <div id="getProductsList" class="products-container">
                     {{-- <button id="addcontent" type="button">ここ！</button> --}}
 
 
                     <table id="product_table" class="table table-hover">
                         @csrf
+                        <tbody>
                         {{-- @foreach ($products as $product)
                             <tr>
                                 <th>id：{{ $product->id }}</th>
@@ -108,10 +114,9 @@
                                 <br>
                             </tr>
                         @endforeach --}}
-
+                        </tbody>
                     </table>
                 </div>
-
 
                 <h2>商品追加フォーム</h2>
                 <div class="etc-login-form">
