@@ -2,5 +2,8 @@
     "/js/app.js": "/js/app.js",
     "/js/productDelete.js": "/js/productDelete.js",
     "/js/productSearch.js": "/js/productSearch.js",
-    "/js/productList.js": "/js/productList.js"
+    "/js/productList.js": "/js/productList.js",
+    "/js/productMakers.js": "/js/productMakers.js",
+    "/js/productPrice.js": "/js/productPrice.js",
+    "/js/productStock.js": "/js/productStock.js"
 }

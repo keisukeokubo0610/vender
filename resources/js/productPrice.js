@@ -1,48 +1,43 @@
 /* Ajax通信開始 */
 $(function() {
-    // $('#get_name').on('click', 'button', function() {
-    $('#getName').on('click', function() {
+    $('#getPrice').on('click', function() {
 
         $('#product_table').empty(); //もともとある要素を空にする
 
-        console.log('検索作動！');
+        console.log('プライス検索作動！');
 
-        var searchName = $('#search_name').val(); //検索ワードを取得
+        var searchPrice = $('#search_price').val();
 
-        console.log(searchName);
-
+        console.log(searchPrice);
 
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             type: 'GET',
-            url: '/home/ajax/' + searchName, //後述するweb.phpのURLと同じ形にする
+            url: '/home/ajax/' + searchPrice, //後述するweb.phpのURLと同じ形にする
             data: {
-                'search_name': searchName //ここはサーバーに贈りたい情報。今回は検索ファームのバリューを送りたい。
+                'search_price': searchPrice //ここはサーバーに贈りたい情報。今回はバリューを送りたい。
             },
             dataType: 'json', //json形式で受け取る
 
-
         })
-
 
         .done(function(data) { //ajaxが成功したときの処理
             console.log('ajax成功！');
-            // $('.loading').addClass('display-none'); //通信中のぐるぐるを消す
+            console.log(data);
             $.each(data, function(index, value) { //dataの中身からvalueを取り出す
-                    //ここの記述はリファクタ可能
-                    // オブジェクトや値を JSON 文字列に変換
-                    var data_stringify = JSON.stringify(data);
-                    var data_json = JSON.parse(data_stringify);
+
+                    // // オブジェクトや値を JSON 文字列に変換
+                    // var data_stringify = JSON.stringify(data);
+                    // var data_json = JSON.parse(data_stringify);
                     console.log(value);
+                    // console.log(data_json);
 
 
 
                     var i = 0;
                     for (i = 0; i < value.length; i++) {　　　 // １ユーザー情報のビューテンプレートを作成
 
-
                         addhtml = `
-            
             <tr>
                 <th>id： ${value[i].id}</th>
                 <th>商品画像：<img src="/storage/${value[i].img_path}" alt="商品画像"></th>
@@ -62,7 +57,7 @@ $(function() {
                 <br>
             </tr>
             `;
-                        // console.log('送るかな！');
+
                         $('#product_table').append(addhtml); //できあがったテンプレートをビューに追加
                     }
                 }) //できあがったテンプレートをビューに追加
@@ -72,7 +67,8 @@ $(function() {
             }
 
         }).fail(function() {　　　 //ajax通信がエラーのときの処理
-            console.log('どんまい！');
+            console.log('検索できませんでした！');
         })
+
     })
 });

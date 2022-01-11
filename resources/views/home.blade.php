@@ -1,7 +1,7 @@
 @extends('template')
 
-@section('title', 'ユーザー新規登録')
-@section('description', 'ユーザー登録のページ')
+@section('title', 'ホーム画面')
+@section('description', 'ホーム画面です。')
     @include('head')
 
 @section('content')
@@ -37,7 +37,7 @@
 
                     {{-- メーカー検索 --}}
                     <div class="search-group">
-                        <form class="search-form" action="{{ route('companySearch') }}">
+                        {{-- <form class="search-form" action="{{ route('companySearch') }}"> --}}
                             <label for="company_name" class="sr-only">メーカー名</label>
 
                             <select name="company_name" id="company_name">
@@ -46,35 +46,36 @@
                                     <option value="{{ $maker->company_name }}">{{ $maker->company_name }}</option>
                                 @endforeach
                             </select>
-                            <button type="submit" class="btn btn-success">検索する</button>
-                        </form>
+                            <button id="getMaker" type="button" class="btn btn-success">検索する</button>
+                        {{-- </form> --}}
                     </div>
+
+
 
                     {{-- 価格検索 --}}
                     <div class="search-group">
-                        <form class="search-form" action="{{ route('priceSearch') }}">
+                        {{-- <form class="search-form" action="{{ route('priceSearch') }}"> --}}
                             @csrf
                             {{-- <input type="text" name="price" placeholder="価格検索"> --}}
 
-                            <select name="price" id="price">
+                            <select name="price" id="search_price">
                                 <option value="" selected>価格を指定してください</option>
                                 @foreach ($products as $product)
                                     <option value="{{ $product->price }}">{{ $product->price }}</option>
                                 @endforeach
                             </select>
 
-                            <button type="submit" class="btn btn-success">検索する</button>
-                        </form>
+                            <button id="getPrice" type="button" class="btn btn-success">検索する</button>
+                        {{-- </form> --}}
                     </div>
 
                     {{-- 在庫検索 --}}
                     <div class="search-group">
-                        <form class="search-form" action="{{ route('stockSearch') }}">
-                            @csrf
-                            <input type="text" name="stock" placeholder="在庫検索">
-
-                            <button type="submit" class="btn btn-success">検索する</button>
-                        </form>
+                        {{-- <form class="search-form" action="{{ route('stockSearch') }}"> --}}
+                            {{-- @csrf --}}
+                            <input id="search_stock" type="text" name="stock" placeholder="在庫検索">
+                            <button id="getStock" type="button" class="btn btn-success">検索する</button>
+                        {{-- </form> --}}
                     </div>
 
 
