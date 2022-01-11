@@ -112,7 +112,6 @@ class AjaxController extends Controller
         $search_price = $request->get('search_price');
 
         if ($search_price !== null) {
-
             $products = Search::select([
                 'product.id',
                 'product.img_path',
@@ -130,8 +129,6 @@ class AjaxController extends Controller
             // return redirect(route('searchProductlist'))->with('danger', 'データがありません');
         } else {
             $products = Search::all();
-            // $products = Search::where('searchPrice', $price)->first();
-
 
         }
         $json = ['products' => $products];

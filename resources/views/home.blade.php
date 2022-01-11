@@ -54,9 +54,6 @@
 
                     {{-- 価格検索 --}}
                     <div class="search-group">
-                        {{-- <form class="search-form" action="{{ route('priceSearch') }}"> --}}
-                            @csrf
-                            {{-- <input type="text" name="price" placeholder="価格検索"> --}}
 
                             <select name="price" id="search_price">
                                 <option value="" selected>価格を指定してください</option>
@@ -72,20 +69,20 @@
                     {{-- 在庫検索 --}}
                     <div class="search-group">
                         {{-- <form class="search-form" action="{{ route('stockSearch') }}"> --}}
-                            {{-- @csrf --}}
-                            <input id="search_stock" type="text" name="stock" placeholder="在庫検索">
+
+                            <input id="search_stock" type="text" name="stock" placeholder="在庫検索" value="{{ $product->stock }}">
                             <button id="getStock" type="button" class="btn btn-success">検索する</button>
                         {{-- </form> --}}
                     </div>
 
 
 
-                    <form action="{{ route('index') }}" method='get'>
+                    {{-- <form action="{{ route('index') }}" method='get'>
                         @csrf
                         <button type="submit" name="sort" class="btn">@sortablelink('id', 'id')</button>
                         <button type="submit" name="sort" class="btn">@sortablelink('price', '価格')</button>
                         <button type="submit" name="sort" class="btn">@sortablelink('stock', '在庫数')</button>
-                    </form>
+                    </form> --}}
                 </div>
 
                 {{-- 商品一覧ここで表示 --}}

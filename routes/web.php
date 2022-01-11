@@ -80,12 +80,12 @@ Route::get('/home/ajax/{company_name}', [AjaxController::class, 'companySearch']
 
 //価格検索
 // Route::get('home/priceSearch', [SearchController::class, 'priceSearch'])->name('priceSearch');
-Route::get('/home/ajax/{price}', [AjaxController::class, 'priceSearch'])->name('priceSearch');
+Route::get('{price}', [AjaxController::class, 'priceSearch'])->name('priceSearch');
 
 
 //在庫検索
 // Route::get('home/stockSearch', [SearchController::class, 'stockSearch'])->name('stockSearch');
-Route::get('/home/ajax/{stock}', [AjaxController::class, 'stockSearch'])->name('stockSearch');
+Route::get('{stock}', [AjaxController::class, 'stockSearch'])->name('stockSearch');
 
 //ソート
 Route::get('home/sort', [SearchController::class, 'index'])->name('index');
