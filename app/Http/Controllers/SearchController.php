@@ -16,19 +16,19 @@ class SearchController extends Controller
     {
 
         $products = Search::select([
-            'product.id',
-            'product.img_path',
-            'product.product_name',
-            'product.price',
-            'product.stock',
+            'products.id',
+            'products.img_path',
+            'products.product_name',
+            'products.price',
+            'products.stock',
             'company.company_name',
         ])
-            ->from('products as product')
+            ->from('products')
             ->join('companies as company', function ($join) {
-                $join->on('product.company_id', '=', 'company.id');
+                $join->on('products.company_id', '=', 'company.id');
             })
-            // ->sortable('item_sort')
-            ->orderBy('product.id', 'desc')
+            ->sortable()
+            ->orderBy('products.id', 'desc')
             ->get();
 
         $makers = Company::all();
@@ -37,26 +37,26 @@ class SearchController extends Controller
     }
 
     //ソート機能
-    public function index(Request $request)
-    {
+    // public function index(Request $request)
+    // {
       
-            $products = Search::select([
-                'products.id',
-                'products.img_path',
-                'products.product_name',
-                'products.price',
-                'products.stock',
-                'companies.company_name',
-                ])
-                ->from('products')
-                ->join('companies','products.company_id', '=', 'companies.id')
-                ->sortable('')
-                ->orderBy('products.id', 'desc')
-                ->get();
+    //         $products = Search::select([
+    //             'products.id',
+    //             'products.img_path',
+    //             'products.product_name',
+    //             'products.price',
+    //             'products.stock',
+    //             'companies.company_name',
+    //             ])
+    //             ->from('products')
+    //             ->join('companies','products.company_id', '=', 'companies.id')
+    //             ->sortable()
+    //             ->orderBy('products.id', 'desc')
+    //             ->get();
                 
-                $makers = Company::all();
-                return view('/home', compact('products', 'makers'));
-            }
+    //             $makers = Company::all();
+    //             return view('/home', compact('products', 'makers'));
+    //         }
             
 
 

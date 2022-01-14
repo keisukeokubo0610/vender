@@ -12,7 +12,6 @@ $(function() {
             $.ajax({
                     type: 'GET',
                     url: 'home/ajax', //後述するweb.phpのURLと同じ形にする
-                    // data: { 'products': data },
                     dataType: 'json', //json形式で受け取る
 
                     beforeSend: function() {

@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
     //ログイン後のホーム画面(商品一覧)へ
     Route::get('/home', [SearchController::class, 'searchProductlist'])->name('searchProductlist');
     //ajax
-    Route::match(['get', 'post'], '/home/ajax', [AjaxController::class, 'getProductAjax'])->name('getProductAjax');
+    Route::get('/home/ajax', [AjaxController::class, 'getProductAjax'])->name('getProductAjax');
 
 
 
@@ -71,7 +71,7 @@ Route::post('register/add', [AuthController::class, 'userAdd'])->name('userAdd')
 
 //キーワード検索
 // Route::get('home/search/', [SearchController::class, 'productSearch'])->name('productSearch');
-Route::match(['get', 'post'], '/home/ajax/{search_name}', [AjaxController::class, 'getNameSearch'])->name('getNameSearch');
+Route::get('/home/ajax/{search_name}', [AjaxController::class, 'getNameSearch'])->name('getNameSearch');
 
 
 //メーカー検索
@@ -82,13 +82,13 @@ Route::get('/home{company_name}', [AjaxController::class, 'companySearch'])->nam
 // Route::get('home/priceSearch', [SearchController::class, 'priceSearch'])->name('priceSearch');
 Route::get('{price}', [AjaxController::class, 'priceSearch'])->name('priceSearch');
 
-
 //在庫検索
 // Route::get('home/stockSearch', [SearchController::class, 'stockSearch'])->name('stockSearch');
 Route::get('/home/ajax{search_stock}', [AjaxController::class, 'stockSearch'])->name('stockSearch');
 
+
 //ソート
-Route::get('home/sort', [SearchController::class, 'index'])->name('index');
+Route::get('home/ajax/sort', [SearchController::class, 'index'])->name('index');
 
 /********************  アイテム登録  ********************/
 

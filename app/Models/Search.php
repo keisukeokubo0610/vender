@@ -31,16 +31,16 @@ class Search extends Model
 
     ];
 
-    public $sortable = [
-        'id',
-        'price',
-        'stock',
+    public $sortableAs = [
+        'products.id',
+        'products.price',
+        'products.stock',
     ]; //追記(ソートに使うカラムを指定
 
 
     public function products()
     {
-        return $this->hasOne(Company::class);
+        return $this->hasMany(Company::class);
     }
 
 

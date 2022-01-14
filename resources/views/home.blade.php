@@ -4,7 +4,16 @@
 @section('description', 'ホーム画面です。')
     @include('head')
 
+
+    {{-- <script>
+        $(function() {
+            // リストを並べ替え可能に
+            $('#sortable').sortable();
+        });
+        </script> --}}
+
 @section('content')
+
     <div class="container">
         <div class="mt-5">
 
@@ -79,12 +88,25 @@
                     </div>
 
 
+
+                    {{-- ソート機能 --}}
                     {{-- <form action="{{ route('index') }}" method='get'>
                         @csrf
-                        <button type="submit" name="sort" class="btn">@sortablelink('id', 'id')</button>
-                        <button type="submit" name="sort" class="btn">@sortablelink('price', '価格')</button>
-                        <button type="submit" name="sort" class="btn">@sortablelink('stock', '在庫数')</button>
+                        <button type="submit" class="btn">@sortablelink('id', 'id')</button>
+                        <button type="submit" class="btn">@sortablelink('price', '価格')</button>
+                        <button type="submit" class="btn">@sortablelink('stock', '在庫数')</button>
                     </form> --}}
+
+
+                        {{-- @csrf --}}
+
+                        <p id="sortable" class="btn">@sortablelink('id', 'id')</p>
+                        <p id="sortable" class="btn">@sortablelink('price', '価格')</p>
+                        <p id="sortable" class="btn">@sortablelink('stock', '在庫数')</p>
+
+                        {{-- <button type="submit" class="btn">@sortablelink('price', '価格')</button>
+                        <button type="submit" class="btn">@sortablelink('stock', '在庫数')</button> --}}
+
                 </div>
 
                 {{-- 商品一覧ここで表示 --}}

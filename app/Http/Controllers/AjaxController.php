@@ -13,6 +13,7 @@ class AjaxController extends Controller
     // 商品一覧表示
     public function getProductAjax()
     {
+        
         $products = Search::select([
             'product.id',
             'product.img_path',
@@ -25,7 +26,7 @@ class AjaxController extends Controller
             ->join('companies as company', function ($join) {
                 $join->on('product.company_id', '=', 'company.id');
             })
-            // ->sortable('item_sort')
+            ->sortable()
             ->orderBy('product.id', 'desc')
             ->get();
 

@@ -16,6 +16,7 @@ class Company extends Model
     ];
     public function search()
     {
-        return $this->hasOne(Search::class);
+        // return $this->hasOne(Search::class);
+        return $this->belongsTo(Search::class);
     }
 }
