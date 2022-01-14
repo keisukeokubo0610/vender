@@ -13,8 +13,6 @@ class AjaxController extends Controller
     // 商品一覧表示
     public function getProductAjax()
     {
-
-        // $products = $this->product->where('name', 'like', '%' . $productsName . '%')->orderBy('items_count', 'desc')->get(); //出品数もほしいため、withCountでitemテーブルのレコード数も取得
         $products = Search::select([
             'product.id',
             'product.img_path',
@@ -73,6 +71,12 @@ class AjaxController extends Controller
 
 
 
+
+
+
+
+
+
     /*****    メーカー検索    *****/
     public function companySearch(Request $request)
     {
@@ -112,6 +116,7 @@ class AjaxController extends Controller
         $search_price = $request->get('search_price');
 
         if ($search_price !== null) {
+
             $products = Search::select([
                 'product.id',
                 'product.img_path',
@@ -129,7 +134,6 @@ class AjaxController extends Controller
             // return redirect(route('searchProductlist'))->with('danger', 'データがありません');
         } else {
             $products = Search::all();
-
         }
         $json = ['products' => $products];
         return response()->json($json);
@@ -157,14 +161,12 @@ class AjaxController extends Controller
                 ->join('companies as company', function ($join) {
                     $join->on('product.company_id', '=', 'company.id');
                 })
-                ->where('stock', '=', $search_stock)
+                ->where('stock', $search_stock)
                 ->get();
             // return redirect(route('searchProductlist'))->with('danger', 'データがありません');
         } else {
             $products = Search::all();
-            // $products = Search::where('searchPrice', $price)->first();
-
-
+           
         }
         $json = ['products' => $products];
         return response()->json($json);

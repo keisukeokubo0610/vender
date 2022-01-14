@@ -60,10 +60,10 @@ $(function() {
                     `;
                                 $('#product_table').append(addhtml); //できあがったテンプレートをビューに追加
                             }
+                            if (value.length == 0) {
+                                alert('商品が見つかりませんでした。');
+                            }
                         })　　　 // 検索結果がなかったときの処理
-                    if (data.length === 0) {
-                        $('.products-index-wrapper').after('<p class="text-center mt-5 search-null">商品が見つかりません</p>');
-                    }
 
                 }).fail(function() {　　　 //ajax通信がエラーのときの処理
                     console.log('どんまい！');

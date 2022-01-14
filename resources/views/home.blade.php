@@ -20,6 +20,8 @@
             <div class="container">
                 <h2 class="getProductsList">商品一覧画面</h2>
 
+
+
                 <div class="search-container products-index-wrapper">
 
                     {{-- キーワード検索 --}}
@@ -69,12 +71,12 @@
                     {{-- 在庫検索 --}}
                     <div class="search-group">
                         {{-- <form class="search-form" action="{{ route('stockSearch') }}"> --}}
-
-                            <input id="search_stock" type="text" name="stock" placeholder="在庫検索" value="{{ $product->stock }}">
+                            <label for="search_stock"></label>
+                            {{-- <input id="search_stock" type="text" name="stock" placeholder="在庫検索" value="{{ $product->stock }}"> --}}
+                            <input id="search_stock" type="text" name="stock" placeholder="在庫検索">
                             <button id="getStock" type="button" class="btn btn-success">検索する</button>
                         {{-- </form> --}}
                     </div>
-
 
 
                     {{-- <form action="{{ route('index') }}" method='get'>

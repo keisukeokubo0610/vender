@@ -13,7 +13,7 @@ $(function() {
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             type: 'GET',
-            url: searchStock, //後述するweb.phpのURLと同じ形にする
+            url: '/home/ajax' + searchStock, //後述するweb.phpのURLと同じ形にする
             data: {
                 'search_stock': searchStock //ここはサーバーに贈りたい情報。今回はバリューを送りたい。
             },
@@ -58,11 +58,14 @@ $(function() {
             `;
                         $('#product_table').append(addhtml); //できあがったテンプレートをビューに追加
                     }
+
+                    if (value.length == 0) {
+                        alert('商品が見つかりませんでした。');
+                    }
+
                 }) //できあがったテンプレートをビューに追加
                 　　　 // 検索結果がなかったときの処理
-            if (data.length === 0) {
-                $('.products-index-wrapper').after('<p class="text-center mt-5 search-null">商品が見つかりません</p>');
-            }
+
 
         }).fail(function() {　　　 //ajax通信がエラーのときの処理
             console.log('検索できませんでした！');

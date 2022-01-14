@@ -5,7 +5,7 @@ $(function() {
 
         $('#product_table').empty(); //もともとある要素を空にする
 
-        console.log('検索作動！');
+        console.log('キーワード検索作動！');
 
         var searchName = $('#search_name').val(); //検索ワードを取得
 
@@ -65,14 +65,15 @@ $(function() {
                         // console.log('送るかな！');
                         $('#product_table').append(addhtml); //できあがったテンプレートをビューに追加
                     }
+                    if (value.length == 0) {
+                        alert('商品が見つかりませんでした。');
+                    }
                 }) //できあがったテンプレートをビューに追加
                 　　　 // 検索結果がなかったときの処理
-            if (data.length === 0) {
-                $('.products-index-wrapper').after('<p class="text-center mt-5 search-null">商品が見つかりません</p>');
-            }
+
 
         }).fail(function() {　　　 //ajax通信がエラーのときの処理
-            console.log('どんまい！');
+            console.log('検索できませんでした！');
         })
     })
 });
