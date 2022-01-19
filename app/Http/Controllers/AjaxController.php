@@ -10,10 +10,65 @@ use Illuminate\Support\Facades\DB;
 class AjaxController extends Controller
 {
 
+    //ソート
+    // public function index($id = null, $stock = null, $price = null, $sort_item =  null, $sort = null)
+    public function index(Request $request)
+    {
+        $sort_item = $request->get('sort_item');
+        $sort = $request->get('sort');
+
+
+        // $id = Request::inputs('id');
+        // $stock = Request::inputs('stock');
+        // $price = Request::inputs('price');
+        // $sort_item = Request::get('sort_item');
+        // $sort = Request::inputs('sort');
+
+        // ソート
+        if (!is_null($sort_item) && !is_null($sort)) {
+            $products = Search::select([
+                'product.id',
+                'product.img_path',
+                'product.product_name',
+                'product.price',
+                'product.stock',
+                'company.company_name',
+            ])
+                ->from('products as product')
+                ->join('companies as company', function ($join) {
+                    $join->on('product.company_id', '=', 'company.id');
+                })->orderBy($sort_item, $sort);
+            // ->sortable()
+            // ->orderBy('product.id', 'desc')
+            // ->latest('product.id');
+            // $products = DB::table('products')->join('companies', 'products.company_id', '=', 'companies.id');
+
+
+            // idの指定があった場合
+            // if (!is_null($id)) {
+            //     $products->where('product.id', '=', $id);
+            // }
+            // // stockの指定があった場合
+            // if (!is_null($stock)) {
+            //     $products->where('product.stock', '=', $stock);
+            // }
+            // // priceの指定があった場合
+            // if (!is_null($price)) {
+            //     $products->where('product.price', '=', $price);
+            // }
+            return $products->get();
+        }
+        // $json = ['products' => $products];
+        // return response()->json($json);
+
+    }
+
+
+
     // 商品一覧表示
     public function getProductAjax()
     {
-        
+
         $products = Search::select([
             'product.id',
             'product.img_path',
@@ -26,8 +81,9 @@ class AjaxController extends Controller
             ->join('companies as company', function ($join) {
                 $join->on('product.company_id', '=', 'company.id');
             })
-            ->sortable()
-            ->orderBy('product.id', 'desc')
+            // ->sortable()
+            // ->orderBy('product.id', 'desc')
+            ->latest('product.id')
             ->get();
 
         $json = ['products' => $products];
@@ -167,7 +223,6 @@ class AjaxController extends Controller
             // return redirect(route('searchProductlist'))->with('danger', 'データがありません');
         } else {
             $products = Search::all();
-           
         }
         $json = ['products' => $products];
         return response()->json($json);

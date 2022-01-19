@@ -307,6 +307,7 @@
             font-size: 25px;
             color: #aaaaaa;
             font-weight: bold;
+            box-sizing: border-box;
         }
         
         img {
@@ -316,13 +317,17 @@
         
         th {
             vertical-align: middle!important;
-            margin-right: 15px;
+            margin-top: 10px;
+            margin-right: 10px;
             display: inline-block;
+            box-sizing: border-box;
+            border: none!important;
         }
         
         tr {
             display: block;
             margin-bottom: 15px;
+            box-sizing: border-box;
         }
         
         @media (max-width: 375px) {

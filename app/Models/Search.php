@@ -44,13 +44,4 @@ class Search extends Model
     }
 
 
-    // public $sortableAs = ['item_sort'];
-
-    // public function itemSortable($query, $direction)
-    // {
-    //     return $query->join('companies as company', function ($join) {
-    //         $join->on('products.company_id', '=', 'company.id');
-    //     })
-    //     ->orderBy('products.id', $direction);
-    // }
 }

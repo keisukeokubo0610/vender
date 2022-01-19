@@ -4,8 +4,12 @@ $(function() {
         // $('.getProductsList').on('load', function() {
         // $('.getProductsList').on('click', function(data) {
         //実行処理
+        console.log('検索しようかどうしようか');
+        console.log(document.URL);
+        var homeUrl = (document.URL);
 
-        if (document.URL.match("/home")) {
+        // if (document.URL.match("/home")) {
+        if (homeUrl === "http://localhost/home") {
 
             console.log('分岐成功！');
 
@@ -26,7 +30,6 @@ $(function() {
                     $.each(data, function(index, value) { //dataの中身からvalueを取り出す
                             　　　　 //ここの記述はリファクタ可能
 
-                            console.log(value);
                             // オブジェクトや値を JSON 文字列に変換
                             var data_stringify = JSON.stringify(data);
                             var data_json = JSON.parse(data_stringify);
@@ -39,6 +42,7 @@ $(function() {
                                 addhtml = `
                     
                     <tr>
+                    
                         <th>id： ${value[i].id}</th>
                         <th>商品画像：<img src="/storage/${value[i].img_path}" alt="商品画像"></th>
                         <th>商品名：${value[i].product_name} </th>

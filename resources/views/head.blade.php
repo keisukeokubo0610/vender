@@ -13,6 +13,7 @@
         <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="{{ mix('js/productDelete.js') }}"></script>
         <script src="{{ mix('js/productList.js') }}"></script>
+        <script src="{{ mix('js/productSort.js') }}"></script>
         <script src="{{ mix('js/productSearch.js') }}"></script>
         <script src="{{ mix('js/productMakers.js') }}"></script>
         <script src="{{ mix('js/productPrice.js') }}"></script>

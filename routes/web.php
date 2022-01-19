@@ -43,7 +43,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [SearchController::class, 'searchProductlist'])->name('searchProductlist');
     //ajax
     Route::get('/home/ajax', [AjaxController::class, 'getProductAjax'])->name('getProductAjax');
-
+    //sort
+    Route::get('sort', [AjaxController::class, 'index'])->name('index');
 
 
     //商品詳細ページ
@@ -88,7 +89,7 @@ Route::get('/home/ajax{search_stock}', [AjaxController::class, 'stockSearch'])->
 
 
 //ソート
-Route::get('home/ajax/sort', [SearchController::class, 'index'])->name('index');
+// Route::get('home/ajax/sort', [AjaxController::class, 'index'])->name('index');
 
 /********************  アイテム登録  ********************/
 

@@ -36,7 +36,7 @@
                     {{-- キーワード検索 --}}
                     <div class="search-group">
                         {{-- <form class="search-form" action="{{ route('productSearch') }}"> --}}
-                            <label for="search_name"></label>
+                        <label for="search_name"></label>
 
                         <input id="search_name" type="text" name="search_name" placeholder="キーワード検索">
                         <button id="getName" type="button" class="btn btn-success">検索する</button>
@@ -44,20 +44,20 @@
                     </div>
 
 
-                    
+
 
                     {{-- メーカー検索 --}}
                     <div class="search-group">
                         {{-- <form class="search-form" action="{{ route('companySearch') }}"> --}}
-                            <label for="company_name" class="sr-only">メーカー名</label>
+                        <label for="company_name" class="sr-only">メーカー名</label>
 
-                            <select name="company_name" id="company_name">
-                                <option value="" selected>メーカーをしてください</option>
-                                @foreach ($makers as $maker)
-                                    <option value="{{ $maker->company_name }}">{{ $maker->company_name }}</option>
-                                @endforeach
-                            </select>
-                            <button id="getMaker" type="button" class="btn btn-success">検索する</button>
+                        <select name="company_name" id="company_name">
+                            <option value="" selected>メーカーをしてください</option>
+                            @foreach ($makers as $maker)
+                                <option value="{{ $maker->company_name }}">{{ $maker->company_name }}</option>
+                            @endforeach
+                        </select>
+                        <button id="getMaker" type="button" class="btn btn-success">検索する</button>
                         {{-- </form> --}}
                     </div>
 
@@ -66,24 +66,24 @@
                     {{-- 価格検索 --}}
                     <div class="search-group">
 
-                            <select name="price" id="search_price">
-                                <option value="" selected>価格を指定してください</option>
-                                @foreach ($products as $product)
-                                    <option value="{{ $product->price }}">{{ $product->price }}</option>
-                                @endforeach
-                            </select>
+                        <select name="price" id="search_price">
+                            <option value="" selected>価格を指定してください</option>
+                            @foreach ($products as $product)
+                                <option value="{{ $product->price }}">{{ $product->price }}</option>
+                            @endforeach
+                        </select>
 
-                            <button id="getPrice" type="button" class="btn btn-success">検索する</button>
+                        <button id="getPrice" type="button" class="btn btn-success">検索する</button>
                         {{-- </form> --}}
                     </div>
 
                     {{-- 在庫検索 --}}
                     <div class="search-group">
                         {{-- <form class="search-form" action="{{ route('stockSearch') }}"> --}}
-                            <label for="search_stock"></label>
-                            {{-- <input id="search_stock" type="text" name="stock" placeholder="在庫検索" value="{{ $product->stock }}"> --}}
-                            <input id="search_stock" type="text" name="stock" placeholder="在庫検索">
-                            <button id="getStock" type="button" class="btn btn-success">検索する</button>
+                        <label for="search_stock"></label>
+                        {{-- <input id="search_stock" type="text" name="stock" placeholder="在庫検索" value="{{ $product->stock }}"> --}}
+                        <input id="search_stock" type="text" name="stock" placeholder="在庫検索">
+                        <button id="getStock" type="button" class="btn btn-success">検索する</button>
                         {{-- </form> --}}
                     </div>
 
@@ -92,32 +92,65 @@
                     {{-- ソート機能 --}}
                     {{-- <form action="{{ route('index') }}" method='get'>
                         @csrf
-                        <button type="submit" class="btn">@sortablelink('id', 'id')</button>
-                        <button type="submit" class="btn">@sortablelink('price', '価格')</button>
-                        <button type="submit" class="btn">@sortablelink('stock', '在庫数')</button>
+                        <input type="hidden" value="asc">
+
+                        <button id="sortable" type="submit" value="{{ $product->price }}" class="btn">価格</button>
+                        <button id="sortable" type="submit" value="{{ $product->stock }}" class="btn">在庫数</button>
                     </form> --}}
 
 
-                        {{-- @csrf --}}
 
-                        <p id="sortable" class="btn">@sortablelink('id', 'id')</p>
-                        <p id="sortable" class="btn">@sortablelink('price', '価格')</p>
-                        <p id="sortable" class="btn">@sortablelink('stock', '在庫数')</p>
+                    {{-- @csrf --}}
 
-                        {{-- <button type="submit" class="btn">@sortablelink('price', '価格')</button>
-                        <button type="submit" class="btn">@sortablelink('stock', '在庫数')</button> --}}
+                    {{-- <button id="sortable" type="button" class="btn">@sortablelink('id', 'ID')</button>
+
+                    <button id="sortable" type="button" class="btn">@sortablelink('stock', '在庫数')</button>
+                    <button id="sortable" type="button" class="btn">@sortablelink('price', '価格')</button> --}}
 
                 </div>
+                <table class="table table-hover">
+                    <tr>
+                        <th class="sortable">
+                            <button type="button" name="sort_item" value="id">商品ID asc</button>
+                            <input class="sort_type" type="hidden" name="sort" value="asc">
+                        </th>
+                        <th class="sortable mr-3">
+                            <button type="button" name="sort_item" value="id">商品ID desc</button>
+                            <input class="sort_type" type="hidden" name="sort" value="desc">
+                        </th>
+
+                        <th class="sortable">
+                            <button type="button" name="sort_item" value="stock">Stock asc</button>
+                            <input class="sort_type" type="hidden" name="sort" value="asc">
+                        </th>
+                        <th class="sortable">
+                            <button type="button" name="sort_item" value="stock">Stock desc</button>
+                            <input class="sort_type" type="hidden" name="sort" value="desc">
+
+                        </th>
+                        <th class="sortable">
+                            <button type="button" name="sort_item" value="price">price asc</button>
+                            <input class="sort_type" type="hidden" name="sort" value="asc">
+                        </th>
+                        <th class="sortable">
+                            <button type="button" name="sort_item" value="price">price desc</button>
+                            <input class="sort_type" type="hidden" name="sort" value="desc">
+                        </th>
+                    </tr>
+                </table>
 
                 {{-- 商品一覧ここで表示 --}}
                 <div id="getProductsList" class="products-container">
                     {{-- <button id="addcontent" type="button">ここ！</button> --}}
 
-
                     <table id="product_table" class="table table-hover">
                         @csrf
                         <tbody>
-                        {{-- @foreach ($products as $product)
+
+
+
+                            
+                            {{-- @foreach ($products as $product)
                             <tr>
                                 <th>id：{{ $product->id }}</th>
                                 <th>商品画像：<img src="{{ '/storage/' . $product->img_path }}" alt="商品画像"></th>

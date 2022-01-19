@@ -27,7 +27,7 @@ class SearchController extends Controller
             ->join('companies as company', function ($join) {
                 $join->on('products.company_id', '=', 'company.id');
             })
-            ->sortable()
+            // ->sortable()
             ->orderBy('products.id', 'desc')
             ->get();
 
