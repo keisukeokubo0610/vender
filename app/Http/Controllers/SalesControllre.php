@@ -26,7 +26,7 @@ class SalesControllre extends Controller
             $join->on('sales.product_id', '=', 'products.id');
         })
         ->where('sales.product_id','=', $id)
-        ->decrement('sales.product_stock');
+        ->decrement('sales.product_stock','products.stock');
         
         try {
             // $products->update();
