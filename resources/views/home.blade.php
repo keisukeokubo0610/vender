@@ -88,28 +88,12 @@
                     </div>
 
 
-
-                    {{-- ソート機能 --}}
-                    {{-- <form action="{{ route('index') }}" method='get'>
-                        @csrf
-                        <input type="hidden" value="asc">
-
-                        <button id="sortable" type="submit" value="{{ $product->price }}" class="btn">価格</button>
-                        <button id="sortable" type="submit" value="{{ $product->stock }}" class="btn">在庫数</button>
-                    </form> --}}
-
-
-
-                    {{-- @csrf --}}
-
-                    {{-- <button id="sortable" type="button" class="btn">@sortablelink('id', 'ID')</button>
-
-                    <button id="sortable" type="button" class="btn">@sortablelink('stock', '在庫数')</button>
-                    <button id="sortable" type="button" class="btn">@sortablelink('price', '価格')</button> --}}
-
                 </div>
+
+                {{-- ソート --}}
                 <table class="table table-hover">
                     <tr>
+                        {{-- 商品ID --}}
                         <th class="sortable">
                             <button type="button" name="sort_item" value="id">商品ID asc</button>
                             <input class="sort_type" type="hidden" name="sort" value="asc">
@@ -118,7 +102,7 @@
                             <button type="button" name="sort_item" value="id">商品ID desc</button>
                             <input class="sort_type" type="hidden" name="sort" value="desc">
                         </th>
-
+                        {{-- ストック --}}
                         <th class="sortable">
                             <button type="button" name="sort_item" value="stock">Stock asc</button>
                             <input class="sort_type" type="hidden" name="sort" value="asc">
@@ -126,8 +110,8 @@
                         <th class="sortable">
                             <button type="button" name="sort_item" value="stock">Stock desc</button>
                             <input class="sort_type" type="hidden" name="sort" value="desc">
-
                         </th>
+                        {{-- 価格 --}}
                         <th class="sortable">
                             <button type="button" name="sort_item" value="price">price asc</button>
                             <input class="sort_type" type="hidden" name="sort" value="asc">
@@ -149,7 +133,7 @@
 
 
 
-                            
+
                             {{-- @foreach ($products as $product)
                             <tr>
                                 <th>id：{{ $product->id }}</th>

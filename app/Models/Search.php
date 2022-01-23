@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable; //追記
 use App\Models\Company;
+use App\Models\Sale;
 
 //商品検索時に使う
 class Search extends Model
@@ -41,6 +42,11 @@ class Search extends Model
     public function products()
     {
         return $this->hasMany(Company::class);
+    }
+
+    public function Sales()
+    {
+        return $this->belongsTo(Sale::class);
     }
 
 

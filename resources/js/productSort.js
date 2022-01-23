@@ -12,12 +12,10 @@ $(function() {
         console.log(sort_item);
         console.log(sort);
 
-
-        console.log('ソートしようかどうしようか');
         // var sortUrl = (document.URL);
         // if (document.URL.match(/sort/)) {
 
-        console.log('ソート成功！');
+        console.log('成功2！');
 
         $.ajax({
                 type: 'GET',
@@ -26,13 +24,13 @@ $(function() {
                 dataType: 'json', //json形式で受け取る
 
                 beforeSend: function() {
-                        console.log('成功2！');
+                        console.log('ソート成功！');
 
                         // $('.loading').removeClass('display-none');
                     } //通信中の処理をここで記載。今回はぐるぐるさせるためにcssでスタイルを消す。
             })
             .done(function(data) { //ajaxが成功したときの処理
-                console.log("通信に成功しました");
+                // console.log("通信に成功しました");
                 // $('.loading').addClass('display-none'); //通信中のぐるぐるを消す
                 $.each(data, function(index, value) { //dataの中身からvalueを取り出す
                         　　　　 //ここの記述はリファクタ可能
@@ -40,20 +38,20 @@ $(function() {
                         // オブジェクトや値を JSON 文字列に変換
                         var data_stringify = JSON.stringify(data);
                         var data_json = JSON.parse(data_stringify);
-                        console.log(data_json);
+                        // console.log(data_json);
 
 
                         // console.log(data);
                         // console.log(value);
 
-                        console.log("ソートしてまっせ");
+                        // console.log("ソートしてまっせ");
 
 
 
                         var i = 0;
                         for (i = 0; i < data_json.length; i++) {　　　 // １ユーザー情報のビューテンプレートを作成
 
-                            console.log("きたきた２");
+                            // console.log("きたきた２");
                             addhtml = `
                     
                     <tr>

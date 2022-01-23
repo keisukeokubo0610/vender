@@ -33,6 +33,12 @@
                         <th>在庫数：{{ $product->stock }}</th>
                         <th>コメント：{{ $product->comment }}</th>
                         <th><a href="{{ route('showUpdate', $product->id) }}" class="btn btn-primary">編集</a></th>
+                        <th>
+                            <form method="POST" action="{{ route('stockAPI') }}" class="btn text-left">
+                                <input value="{{ $product->id }}" type="hidden" name="id">
+                                <button value="{{ $product->stock }}" type="submit" class="form-control" name="product_stock">購入</button>
+                                @csrf
+                            </form>
 
                     </tr>
 

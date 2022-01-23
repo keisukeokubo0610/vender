@@ -17,13 +17,6 @@ class AjaxController extends Controller
         $sort_item = $request->get('sort_item');
         $sort = $request->get('sort');
 
-
-        // $id = Request::inputs('id');
-        // $stock = Request::inputs('stock');
-        // $price = Request::inputs('price');
-        // $sort_item = Request::get('sort_item');
-        // $sort = Request::inputs('sort');
-
         // ソート
         if (!is_null($sort_item) && !is_null($sort)) {
             $products = Search::select([
@@ -38,28 +31,9 @@ class AjaxController extends Controller
                 ->join('companies as company', function ($join) {
                     $join->on('product.company_id', '=', 'company.id');
                 })->orderBy($sort_item, $sort);
-            // ->sortable()
-            // ->orderBy('product.id', 'desc')
-            // ->latest('product.id');
-            // $products = DB::table('products')->join('companies', 'products.company_id', '=', 'companies.id');
-
-
-            // idの指定があった場合
-            // if (!is_null($id)) {
-            //     $products->where('product.id', '=', $id);
-            // }
-            // // stockの指定があった場合
-            // if (!is_null($stock)) {
-            //     $products->where('product.stock', '=', $stock);
-            // }
-            // // priceの指定があった場合
-            // if (!is_null($price)) {
-            //     $products->where('product.price', '=', $price);
-            // }
+           
             return $products->get();
         }
-        // $json = ['products' => $products];
-        // return response()->json($json);
 
     }
 
