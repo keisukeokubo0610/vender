@@ -11,6 +11,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="{{ mix('js/app.js') }}"></script>
         <script src="{{ mix('js/productDelete.js') }}"></script>
         <script src="{{ mix('js/productList.js') }}"></script>
         <script src="{{ mix('js/productSort.js') }}"></script>

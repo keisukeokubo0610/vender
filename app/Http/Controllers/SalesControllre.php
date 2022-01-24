@@ -19,6 +19,7 @@ class SalesControllre extends Controller
         $id = $request->get('id');
         $product_stock = $request->get('product_stock');
 
+
         DB::beginTransaction();
 
         $result = DB::table('sales')
@@ -26,10 +27,14 @@ class SalesControllre extends Controller
             $join->on('sales.product_id', '=', 'products.id');
         })
         ->where('sales.product_id','=', $id)
-        ->decrement('sales.product_stock','products.stock');
+        // ->orWhere(function ($query) {
+        //     $query->where('products.id');
+        // })
+        ->decrement('products.stock');
         
         try {
             // $products->update();
+            //DBに結果を保存
             DB::commit();
         } catch (\Exception $e) {
             $result = [
