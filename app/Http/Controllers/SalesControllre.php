@@ -21,7 +21,7 @@ class SalesControllre extends Controller
 
         DB::beginTransaction();
 
-        if ($product_stock >= 0) {
+        if ($product_stock > 0) {
 
 
             $result = DB::table('sales')
@@ -48,6 +48,7 @@ class SalesControllre extends Controller
                 return $this->resConversionJson($result, $e->getCode());
             }
             return $this->resConversionJson($result);
+
         } else {
             return redirect(route('searchProductlist'))->with('danger', '在庫がありません');
         }
