@@ -8,13 +8,22 @@
 
     <div class="container">
         <div class="mt-5">
-        
+
             <p class="text-right">ようこそ {{ Auth::user()->name }} さん！</p>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             {{-- 検索フォーム --}}
             <div class="container">
                 <h2>商品詳細画面</h2>
-                
+
 
                 @if (session('err_msg'))
                     <p class="text-danger">
@@ -37,8 +46,9 @@
                         <th>
                             <form method="POST" action="{{ route('stockAPI') }}" class="btn text-left">
                                 <input value="{{ $product->id }}" type="hidden" name="id">
-                                <button value="{{ $product->stock }}" type="submit" class="form-control" name="product_stock">購入</button>
-                                @csrf 
+                                <button value="{{ $product->stock }}" type="submit" class="form-control"
+                                    name="product_stock">購入</button>
+                                @csrf
                             </form>
 
                     </tr>

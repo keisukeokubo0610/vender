@@ -19,33 +19,38 @@ class SalesControllre extends Controller
         $id = $request->get('id');
         $product_stock = $request->get('product_stock');
 
-
         DB::beginTransaction();
 
-        $result = DB::table('sales')
-        ->join('products', function ($join) {
-            $join->on('sales.product_id', '=', 'products.id');
-        })
-        ->where('sales.product_id','=', $id)
-        // ->orWhere(function ($query) {
-        //     $query->where('products.id');
-        // })
-        ->decrement('products.stock');
-        
-        try {
-            // $products->update();
-            //DBに結果を保存
-            DB::commit();
-        } catch (\Exception $e) {
-            $result = [
-                'result' => false,
-                'error' => [
-                    'messages' => [$e->getMessage()]
-                ],
-            ];
-            return $this->resConversionJson($result, $e->getCode());
+        if ($product_stock >= 0) {
+
+
+            $result = DB::table('sales')
+                ->join('products', function ($join) {
+                    $join->on('sales.product_id', '=', 'products.id');
+                })
+                ->where('sales.product_id', '=', $id)
+                // ->orWhere(function ($query) {
+                //     $query->where('products.id');
+                // })
+                ->decrement('products.stock');
+
+            try {
+                // $products->update();
+                //DBに結果を保存
+                DB::commit();
+            } catch (\Exception $e) {
+                $result = [
+                    'result' => false,
+                    'error' => [
+                        'messages' => [$e->getMessage()]
+                    ],
+                ];
+                return $this->resConversionJson($result, $e->getCode());
+            }
+            return $this->resConversionJson($result);
+        } else {
+            return redirect(route('searchProductlist'))->with('danger', '在庫がありません');
         }
-        return $this->resConversionJson($result);
     }
 
     private function resConversionJson($result, $statusCode = 200)
