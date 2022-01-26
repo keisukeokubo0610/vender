@@ -4,14 +4,6 @@
 @section('description', 'ホーム画面です。')
     @include('head')
 
-
-    {{-- <script>
-        $(function() {
-            // リストを並べ替え可能に
-            $('#sortable').sortable();
-        });
-        </script> --}}
-
 @section('content')
 
     <div class="container">
@@ -132,35 +124,16 @@
                         <tbody>
 
 
+                            {{-- ここにajax中身入る --}}
 
 
-                            {{-- @foreach ($products as $product)
-                            <tr>
-                                <th>id：{{ $product->id }}</th>
-                                <th>商品画像：<img src="{{ '/storage/' . $product->img_path }}" alt="商品画像"></th>
-                                <th>商品名：{{ $product->product_name }}</th>
-                                <th>価格：{{ $product->price }}</th>
-                                <th>在庫数：{{ $product->stock }}</th>
-                                <th>メーカー名：{{ $product->company_name }}</th>
-                                <th><a href="/product/{{ $product->id }}" class="btn btn-primary">詳細</a></th>
-
-                                <form class="form-inline btn" action="{{ route('productDelete', $product->id) }}"
-                                    method="POST">
-                                    @csrf
-
-                                <th><button id="deleteTarget" data-product-id="{{ $product->id }}" class="btn btn-danger" onClick="delete_alert(event);return false;">削除</button></th>
-                                </form>
-                                <br>
-                            </tr>
-                        @endforeach --}}
                         </tbody>
                     </table>
                 </div>
 
                 <h2>商品追加フォーム</h2>
                 <div class="etc-login-form">
-                    <a class="btn btn-success" href="{{ route('showProductAdd') }}">商品新規登録</a>
-
+                    <p><a class="btn btn-success" href="{{ Route('showProductAdd') }}">商品新規登録</a></p>
 
                     <form action="{{ Route('logout') }}" method="post" class="container">
                         @csrf

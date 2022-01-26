@@ -97,7 +97,7 @@ Route::get('/home/ajax{search_stock}', [AjaxController::class, 'stockSearch'])->
 Route::get('/productAdd', [ProductController::class, 'showProductAdd'])->name('showProductAdd');
 
 //商品登録
-Route::post('/productAdd/add', [ProductController::class, 'productAdd'])->name('productAdd');
+Route::post('productAdd/add', [ProductController::class, 'productAdd'])->name('productAdd');
 
 
 

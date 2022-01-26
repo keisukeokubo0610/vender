@@ -11,7 +11,6 @@ class AjaxController extends Controller
 {
 
     //ソート
-    // public function index($id = null, $stock = null, $price = null, $sort_item =  null, $sort = null)
     public function index(Request $request)
     {
         $sort_item = $request->get('sort_item');
@@ -99,13 +98,6 @@ class AjaxController extends Controller
         $json = ['products' => $products];
         return response()->json($json);
     }
-
-
-
-
-
-
-
 
 
     /*****    メーカー検索    *****/

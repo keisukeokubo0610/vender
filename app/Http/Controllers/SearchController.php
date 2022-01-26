@@ -96,19 +96,6 @@ class SearchController extends Controller
     // public function productSearch(Request $request)
     // {
     //     //入力された文字
-    //     $products = Search::all();
-    //     $search_name = $request->get('search_name');
-    //     $makers = Company::all();
-
-    //     return view('home', compact('products','search_name', 'makers'));
-    // }
-
-
-
-
-    // public function productSearch(Request $request)
-    // {
-    //     //入力された文字
     //     $word = $request->get('word');
     //     $makers = Company::all();
 
