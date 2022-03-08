@@ -19,7 +19,7 @@ $(function() {
 
         $.ajax({
                 type: 'GET',
-                url: 'sort', //後述するweb.phpのURLと同じ形にする
+                url: './sort', //後述するweb.phpのURLと同じ形にする
                 data: { 'sort_item': sort_item, 'sort': sort },
                 dataType: 'json', //json形式で受け取る
 

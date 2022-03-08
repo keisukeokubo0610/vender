@@ -94,10 +94,10 @@ Route::get('/home/ajax{search_stock}', [AjaxController::class, 'stockSearch'])->
 /********************  アイテム登録  ********************/
 
 //商品新規登録画面表示
-Route::get('productAdd', [ProductController::class, 'showProductAdd'])->name('showProductAdd');
+Route::get('/home/productAdd', [ProductController::class, 'showProductAdd'])->name('showProductAdd');
 
 //商品登録
-Route::post('productAdd/add', [ProductController::class, 'productAdd'])->name('productAdd');
+Route::post('/productAdd/add', [ProductController::class, 'productAdd'])->name('productAdd');
 
 
 

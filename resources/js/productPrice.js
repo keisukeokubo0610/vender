@@ -13,7 +13,7 @@ $(function() {
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             type: 'GET',
-            url: searchPrice, //後述するweb.phpのURLと同じ形にする
+            url: './searchPrice', //後述するweb.phpのURLと同じ形にする
             data: {
                 'search_price': searchPrice //ここはサーバーに贈りたい情報。今回はバリューを送りたい。
             },
