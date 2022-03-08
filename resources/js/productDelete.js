@@ -16,7 +16,7 @@ $(function() {
                 }
             })
             $.ajax({
-                url: '/delete/' + productID,
+                url: './delete/' + productID,
                 type: 'POST',
                 data: {
                     'id': productID,
