@@ -24,7 +24,6 @@
 
 
         <div class="login-form-1">
-            {{-- <form method="POST" action="{{ route('userUpdate') }}" id="register-form" class="text-left"> --}}
             <form method="POST" action="{{ route('productUpdate',$products->id) }}" id="register-form" class="text-left">
                 @csrf
                 <div class="login-form-main-message"></div>

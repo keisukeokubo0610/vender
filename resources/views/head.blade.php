@@ -11,14 +11,14 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="{{ mix('js/app.js') }}"></script>
-        <script src="{{ mix('js/productDelete.js') }}"></script>
-        <script src="{{ mix('js/productList.js') }}"></script>
-        <script src="{{ mix('js/productSort.js') }}"></script>
-        <script src="{{ mix('js/productSearch.js') }}"></script>
-        <script src="{{ mix('js/productMakers.js') }}"></script>
-        <script src="{{ mix('js/productPrice.js') }}"></script>
-        <script src="{{ mix('js/productStock.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/productDelete.js') }}"></script>
+        <script src="{{ asset('js/productList.js') }}"></script>
+        <script src="{{ asset('js/productSort.js') }}"></script>
+        <script src="{{ asset('js/productSearch.js') }}"></script>
+        <script src="{{ asset('js/productMakers.js') }}"></script>
+        <script src="{{ asset('js/productPrice.js') }}"></script>
+        <script src="{{ asset('js/productStock.js') }}"></script>
 
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>

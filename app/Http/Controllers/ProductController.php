@@ -40,8 +40,8 @@ class ProductController extends Controller
             ->get();
 
 
-        // return view('product.productAdd', compact('products', 'makers'));
-        return view('product.update', compact('products', 'makers'));
+        return view('product.productAdd', compact('products', 'makers'));
+        // return view('product.update', compact('products', 'makers'));
     }
 
     /*****    商品新規登録    *****/

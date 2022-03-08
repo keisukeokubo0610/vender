@@ -133,7 +133,7 @@
 
                 <h2>商品追加フォーム</h2>
                 <div class="etc-login-form">
-                    <p><a class="btn btn-success" href="{{ Route('showProductAdd') }}">商品新規登録</a></p>
+                    <a class="btn btn-success" href="{{ Route('showProductAdd') }}">商品新規登録</a>
 
                     <form action="{{ Route('logout') }}" method="post" class="container">
                         @csrf
@@ -142,4 +142,5 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

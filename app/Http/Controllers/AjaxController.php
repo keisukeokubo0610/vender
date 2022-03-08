@@ -72,7 +72,7 @@ class AjaxController extends Controller
 
         //入力された文字
         $search_name = $request->get('search_name');
-        //  $makers = Company::get('company_name');
+
 
         //あいまい検索
         if ($search_name !== null) {
@@ -103,7 +103,7 @@ class AjaxController extends Controller
     /*****    メーカー検索    *****/
     public function companySearch(Request $request)
     {
-        // $makers = Company::find('company_name');
+
         $companyName = $request->get('search_company_name');
 
 
@@ -127,8 +127,6 @@ class AjaxController extends Controller
         }
         $json = ['products' => $products];
         return response()->json($json);
-
-        // return view('home', compact('products', 'makers'));
     }
 
 
@@ -154,13 +152,13 @@ class AjaxController extends Controller
                 })
                 ->where('price', '=', $search_price)
                 ->get();
-            // return redirect(route('searchProductlist'))->with('danger', 'データがありません');
+
         } else {
             $products = Search::all();
         }
         $json = ['products' => $products];
         return response()->json($json);
-        //  return view('home', compact('products', 'makers'));
+
     }
 
 
@@ -186,12 +184,12 @@ class AjaxController extends Controller
                 })
                 ->where('stock', $search_stock)
                 ->get();
-            // return redirect(route('searchProductlist'))->with('danger', 'データがありません');
+
         } else {
             $products = Search::all();
         }
         $json = ['products' => $products];
         return response()->json($json);
-        //  return view('home', compact('products', 'makers'));
+
     }
 }

@@ -1,15 +1,11 @@
 $(function() {
 
     $(window).on('load', function() {
-        // $('.getProductsList').on('load', function() {
-        // $('.getProductsList').on('click', function(data) {
         //実行処理
-        // console.log('検索しようかどうしようか');
-        // console.log(document.URL);
         var homeUrl = (document.URL);
 
         // if (document.URL.match("/home")) {
-        if (homeUrl === "http://localhost/home") {
+        if (homeUrl === "http://localhost/Vender/public/home") {
 
             console.log('分岐成功！');
 
@@ -44,12 +40,12 @@ $(function() {
                     <tr>
                     
                         <th>id： ${value[i].id}</th>
-                        <th>商品画像：<img src="/storage/${value[i].img_path}" alt="商品画像"></th>
+                        <th>商品画像：<img src="./storage/${value[i].img_path}" alt="商品画像"></th>
                         <th>商品名：${value[i].product_name} </th>
                         <th>価格：${value[i].price}</th>
                         <th>在庫数：${value[i].stock}</th>
                         <th>メーカー名：${value[i].company_name}</th>
-                        <th><a href="/product/${value[i].id}" class="btn btn-primary">詳細</a></th>
+                        <th><a href="./product/${value[i].id}" class="btn btn-primary">詳細</a></th>
 
                         <form class="form-inline btn" action="{{ route('productDelete', ${value[i].id}) }}"
                             method="POST">

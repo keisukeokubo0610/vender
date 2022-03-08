@@ -41,28 +41,20 @@ $(function() {
                         // console.log(data_json);
 
 
-                        // console.log(data);
-                        // console.log(value);
-
-                        // console.log("ソートしてまっせ");
-
-
-
                         var i = 0;
                         for (i = 0; i < data_json.length; i++) {　　　 // １ユーザー情報のビューテンプレートを作成
 
-                            // console.log("きたきた２");
                             addhtml = `
                     
                     <tr>
 
                         <th>id： ${data_json[i].id}</th>
-                        <th>商品画像：<img src="/storage/${data_json[i].img_path}" alt="商品画像"></th>
+                        <th>商品画像：<img src="./storage/${data_json[i].img_path}" alt="商品画像"></th>
                         <th>商品名：${data_json[i].product_name} </th>
                         <th>価格：${data_json[i].price}</th>
                         <th>在庫数：${data_json[i].stock}</th>
                         <th>メーカー名：${data_json[i].company_name}</th>
-                        <th><a href="/product/${data_json[i].id}" class="btn btn-primary">詳細</a></th>
+                        <th><a href="./product/${data_json[i].id}" class="btn btn-primary">詳細</a></th>
 
                         <form class="form-inline btn" action="{{ route('productDelete', ${data_json[i].id}) }}"
                             method="POST">

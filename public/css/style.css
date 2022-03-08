@@ -315,10 +315,18 @@
             /* height:  */
         }
         
-        th {
+        .products-container th {
             vertical-align: middle!important;
             margin-top: 10px;
             margin-right: 10px;
+            display: inline-block;
+            box-sizing: border-box;
+            border: none!important;
+        }
+        
+        th {
+            vertical-align: middle!important;
+            margin-top: 10px;
             display: inline-block;
             box-sizing: border-box;
             border: none!important;
